@@ -329,7 +329,7 @@ class RegisterEntry(RegisterEntryAbstract):
         return super().__getitem__(key)
 
     def get_reset_values(self):
-        """Get iterator object of the tuple (fieldname, resetvalue)."""
+        """Get iterator object of the tuple (fieldname, resetvalue) for writable fields only."""
         return {
             fieldname: field.get_field(self._reset)
             for fieldname, field in self.writable_field_items()
@@ -408,9 +408,15 @@ class RegisterEntry(RegisterEntryAbstract):
         """UVM-like - Get the specified reset value for this register."""
         return self._reset
 
-    def write(self, value, mask=None):
+    def write(self, *args, **kwargs):
         """UVM-like - Write the specified value in this register."""
-        self.set_value(value, mask)
+        if args and not kwargs:
+            if len(args) == 1:
+                self.set_value(args[0])
+        elif not args and kwargs:
+            self.set_value(kwargs)
+        else:
+            raise ValueError("write just takes one dict or kwargs as argument.")
 
     def read(self):
         """UVM-like - Read the current value from this register."""
@@ -433,10 +439,18 @@ class RegisterEntry(RegisterEntryAbstract):
         """UVM-like - Returns the base external physical address of this register"""
         return self.regfile.get_base_addr() + self.addr
 
-    def write_update(self, values):
+    def write_update(self, *args, **kwargs):
         """Wrapper function around set() fields defined by value[dict] and update()"""
-        for field_name, field_value in values.items():
+        if args:
+            if len(args) == 1 and isinstance(args[0], dict):
+                for field_name, field_value in args[0].items():
+                    self.field(field_name).set(field_value)
+            else:
+                raise ValueError("write_update just takes one dict as argument.")
+
+        for field_name, field_value in kwargs.items():
             self.field(field_name).set(field_value)
+
         self.update()
 
 
