@@ -25,8 +25,6 @@
 Generic Device on which a regfile can operate
 """
 
-__version__ = "0.0.3"
-
 import logging
 import os
 import random
@@ -94,7 +92,7 @@ class RegfileDev:
     def read(self, baseaddr, entry):
         value = self.rfdev_read(baseaddr + entry.addr)
         self.logger.debug(
-            "%sRegfileDevice reading entry %s from address " "0x%x = 0x%x",
+            "%sRegfileDevice reading entry %s from address 0x%x = 0x%x",
             self._prefix,
             entry.name,
             entry.addr,

@@ -29,8 +29,6 @@ import abc
 import traceback
 import warnings
 
-__version__ = "0.0.3"
-
 
 # pylint: disable=missing-class-docstring, missing-function-docstring
 
