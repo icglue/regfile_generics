@@ -380,7 +380,7 @@ class RegisterEntry(RegisterEntryAbstract):
         self.desired_value = value
 
     def get(self):
-        """UVM-like - Return thee desired value of the fields in the register."""
+        """UVM-like - Return the desired value of the fields in the register."""
         return self.desired_value
 
     def get_mirrored_value(self):
