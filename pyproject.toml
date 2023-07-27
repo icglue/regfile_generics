@@ -1,3 +1,41 @@
+[build-system]
+requires = [
+    "hatchling",
+    "hatch-vcs"
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[project]
+name = "regfile_generics"
+dynamic = ['version']
+description = "Python abstraction layer for registerfile access"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Felix Neumärker", email = "felix.neumaerker@icglue.org"},
+    {name = "Andreas Dixius", email = "andreas.dixius@icglue.org"},
+]
+maintainers = [
+    {name = "Felix Neumärker", email = "felix.neumaerker@icglue.org"},
+    {name = "Andreas Dixius", email = "andreas.dixius@icglue.org"},
+]
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+]
+keywords = ["registerfile"]
+license = "BSD-2-Clause"
+
+[project.optional-dependencies]
+test = ["pytest"]
+doc = ["sphinx"]
+
+[project.urls]
+Homepage = "https://github.com/icglue/regfile_generics"
 
 [tool.pytest.ini_options]
 pythonpath = [
@@ -5,7 +43,16 @@ pythonpath = [
 ]
 addopts = [
     "--import-mode=importlib",
+    "-s",
+    "-v"
 ]
 
+[tool.pylint]
+max-line-length = 120
+
+[tool.autopep8]
+# E501 - Try to make lines fit within --max-line-length characters.
+ignore = ["E501"]
 [tool.isort]
 profile = "black"
+line_length = 120
