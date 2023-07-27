@@ -6,3 +6,6 @@ pythonpath = [
 addopts = [
     "--import-mode=importlib",
 ]
+
+[tool.isort]
+profile = "black"
