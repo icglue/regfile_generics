@@ -1,3 +1,4 @@
+
 from pytest import warns
 
 # pylint: disable=line-too-long,missing-function-docstring
@@ -28,9 +29,10 @@ def test_uvm_write(sessionsubwordregfile):
     assert rfdev.getvalue(0xF000_0000) == 0x3
     assert rfdev.getvalue(0xF000_00C0) == 0x2 << 4
     assert rfdev.getvalue(0xF000_0040) == 0b10110
+    write_count += 3
     assert regfile["reg_addr40"].get_mirrored_value() == 0b10110
 
-    assert write_count + 3 == rfdev.write_count
+    assert write_count == rfdev.write_count
 
     regfile["reg_addr40"].set(0b01001)
     assert rfdev.getvalue(0xF000_0040) == 0b10110
@@ -39,6 +41,9 @@ def test_uvm_write(sessionsubwordregfile):
 
     assert regfile["reg_addr40"].get_mirrored_value() == 0b10110
     regfile["reg_addr40"].update()
+    write_count += 1
+    assert write_count == rfdev.write_count
+
     assert rfdev.getvalue(0xF000_0040) == 0b01001
     assert regfile["reg_addr40"].get_mirrored_value() == 0b01001
     assert regfile["reg_addr40"].get_reset() == 0b01010
@@ -50,14 +55,38 @@ def test_uvm_write(sessionsubwordregfile):
     assert mirrored_reg.read() == 0b01001
 
     assert read_count + 1 == rfdev.read_count
+    read_count += 1
     assert regfile["reg_addr40"].get_offset() == 0x40
     assert regfile["reg_addr40"].get_address() == 0xF000_0040
 
-    write_count = rfdev.write_count
-    read_count = rfdev.read_count
+    # write update
     regfile.reg_addr40_r.write_update(
         {"start": 0, "enable_feature0": 1, "enable_feature1": 1}
     )
+    write_count += 1
     assert rfdev.getvalue(0xF000_0040) == 0b01110
     assert read_count == rfdev.read_count
+    assert write_count == rfdev.write_count
+
+    regfile.reg_addr40_r.write_update(start=1, enable_feature0=0, enable_feature1=0)
+    write_count += 1
+    assert rfdev.getvalue(0xF000_0040) == 0b01001
+    assert read_count == rfdev.read_count
+    assert write_count == rfdev.write_count
+
+    # write:
+    reg_addr40_v = {f"enable_feature{i}": i & 0x1 for i in range(4)}
+    reg_addr40_v["start"] = 0
+    regfile.reg_addr40_r.write_update(reg_addr40_v)
+    write_count += 1
+    assert rfdev.getvalue(0xF000_0040) == 0b10100
+    assert read_count == rfdev.read_count
+    assert write_count == rfdev.write_count
+
+    regfile.reg_addr40_r.write_update(
+        start=1, **{f"enable_feature{i}": ~i & 0x1 for i in range(4)}
+    )
+    assert rfdev.getvalue(0xF000_0040) == 0b01011
+    assert read_count == rfdev.read_count
     assert write_count + 1 == rfdev.write_count
+    write_count += 1

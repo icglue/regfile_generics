@@ -1,7 +1,6 @@
 """Regfile access tests"""
 
 import pytest
-from pytest import warns
 
 
 def test_regfile_attribute_exception(sessionsubwordregfile):
