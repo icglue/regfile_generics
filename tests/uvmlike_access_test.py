@@ -1,10 +1,6 @@
 
 from pytest import warns
 
-# pylint: disable=unused-import,redefined-outer-name
-# flake8: noqa
-from fixtures import sessionsubwordregfile
-
 # pylint: disable=line-too-long,missing-function-docstring
 
 

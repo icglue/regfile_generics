@@ -3,10 +3,6 @@
 import pytest
 from pytest import warns
 
-# pylint: disable=unused-import,redefined-outer-name
-# flake8: noqa
-from fixtures import sessionsubwordregfile, sessionsimpleregfile, sessionmemregfile
-
 def test_regfile_attribute_exception(sessionsubwordregfile):
     regfile, rfdev = sessionsubwordregfile
     with pytest.raises(Exception):
