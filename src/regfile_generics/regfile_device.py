@@ -40,12 +40,11 @@ import traceback
 class RegfileDev:
     def __init__(self, **kwargs):
         super().__init__()
-        kwargs.setdefault("bytes_per_word", 4)
-        kwargs.setdefault("logger", logging.getLogger(__name__))
-        kwargs.setdefault("prefix", "")
-        self._prefix = kwargs["prefix"]
-        self.n_word_bytes = kwargs["bytes_per_word"]
-        self.logger = kwargs["logger"]
+        self.n_word_bytes = kwargs.pop("bytes_per_word", 4)
+        self.logger = kwargs.pop("logger", logging.getLogger(__name__))
+        self._prefix = kwargs.pop("prefix", "")
+        self._blockread = kwargs.pop("blockread", None)
+        self._blockwrite = kwargs.pop("blockwrite", None)
 
         self.callback = kwargs.pop("callback", {})
         if not isinstance(self.callback, dict):
@@ -69,16 +68,24 @@ class RegfileDev:
 
     def readwrite_block(self, start_addr, values, write):
         if not write:
-            for i in range(len(values)):  # pylint: disable=consider-using-enumerate
-                # Modifications are be done by reference
-                values[i] = self.rfdev_read(start_addr + i * self.n_word_bytes)
+            if self._blockread:
+                for i, data in enumerate(self._blockread(start_addr, len(values))):
+                    # Modifications are be done by reference
+                    values[i] = data
+            else:
+                for i in range(len(values)):  # pylint: disable=consider-using-enumerate
+                    # Modifications are be done by reference
+                    values[i] = self.rfdev_read(start_addr + i * self.n_word_bytes)
         else:
-            mask = (1 << (8 * self.n_word_bytes)) - 1
-            write_mask = mask
-            for i, value in enumerate(values):
-                self.rfdev_write(
-                    start_addr + i * self.n_word_bytes, value, mask, write_mask
-                )
+            if self._blockwrite:
+                self._blockwrite(start_addr, values)
+            else:
+                mask = (1 << (8 * self.n_word_bytes)) - 1
+                write_mask = mask
+                for i, value in enumerate(values):
+                    self.rfdev_write(
+                        start_addr + i * self.n_word_bytes, value, mask, write_mask
+                    )
 
     def rfdev_read(self, addr):
         """Read method could be overridden when deriving a new RegfileDev"""
