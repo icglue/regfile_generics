@@ -1,4 +1,3 @@
-
 from pytest import warns
 
 # pylint: disable=line-too-long,missing-function-docstring
@@ -60,9 +59,7 @@ def test_uvm_write(sessionsubwordregfile):
     assert regfile["reg_addr40"].get_address() == 0xF000_0040
 
     # write update
-    regfile.reg_addr40_r.write_update(
-        {"start": 0, "enable_feature0": 1, "enable_feature1": 1}
-    )
+    regfile.reg_addr40_r.write_update({"start": 0, "enable_feature0": 1, "enable_feature1": 1})
     write_count += 1
     assert rfdev.getvalue(0xF000_0040) == 0b01110
     assert read_count == rfdev.read_count
@@ -83,9 +80,7 @@ def test_uvm_write(sessionsubwordregfile):
     assert read_count == rfdev.read_count
     assert write_count == rfdev.write_count
 
-    regfile.reg_addr40_r.write_update(
-        start=1, **{f"enable_feature{i}": ~i & 0x1 for i in range(4)}
-    )
+    regfile.reg_addr40_r.write_update(start=1, **{f"enable_feature{i}": ~i & 0x1 for i in range(4)})
     assert rfdev.getvalue(0xF000_0040) == 0b01011
     assert read_count == rfdev.read_count
     assert write_count + 1 == rfdev.write_count

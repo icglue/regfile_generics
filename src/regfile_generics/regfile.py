@@ -78,16 +78,11 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
         if key in self._fields:
             return self._fields[key].get_field(self._get_value())
 
-        raise KeyError(
-            f"Field {key} does not exist. "
-            f"Available fields: {list(self._fields.keys())}"
-        )  # pragma: nocover
+        raise KeyError(f"Field {key} does not exist. Available fields: {list(self._fields.keys())}")  # pragma: nocover
 
     def __setattr__(self, name, value):
         if self._lock is True and name not in self.__dict__:
-            raise AttributeError(
-                f"Unable to allocate attribute {name} - Instance is locked."
-            )
+            raise AttributeError(f"Unable to allocate attribute {name} - Instance is locked.")
 
         super().__setattr__(name, value)
 
@@ -95,8 +90,7 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
         """Dict-like access to write a value to a field."""
         if key not in self._fields:
             raise KeyError(
-                f"Field {key} does not exist. "
-                f"Available fields: {list(self.get_field_names())}"
+                f"Field {key} does not exist. Available fields: {list(self.get_field_names())}"
             )  # pragma: nocover
 
         field = self._fields[key]
@@ -110,10 +104,7 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
         truncval = value & fieldmask
 
         if value != truncval:
-            _regfile_warn_user(
-                f"{field.name}: value 0x{value:x} is truncated to 0x{truncval:x} "
-                f"(mask: 0x{fieldmask})."
-            )
+            _regfile_warn_user(f"{field.name}: value 0x{value:x} is truncated to 0x{truncval:x} (mask: 0x{fieldmask}).")
         return truncval
 
     def _fit_fieldvalue_for_write(self, field, value):
@@ -148,9 +139,7 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
                 field = self._fields[fieldname]
                 value |= self._fit_fieldvalue(field, fieldvalue) << field.lsb
             return value
-        raise TypeError(
-            f"Unable to get_value for type {type(value)} " f"-- {str(value)}."
-        )  # pragma: nocover
+        raise TypeError(f"Unable to get_value for type {type(value)} -- {str(value)}.")  # pragma: nocover
 
     def get_writable_fieldnames(self):
         """Return a copied list containing all writable fieldnames"""
@@ -179,9 +168,7 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
         strfields = []
         for name, field in self.items():
             strfields.append(f"'{name}': 0x{field.get_field(int_value):x}")
-        return (
-            f"Register {self.get_name()}: {{{', '.join(strfields)}}} = 0x{int_value:x}"
-        )
+        return f"Register {self.get_name()}: {{{', '.join(strfields)}}} = 0x{int_value:x}"
 
     def set_value(self, value, mask=None):
         """Set the value of register. The value can be an integer a dict or
@@ -198,13 +185,9 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
                 if fieldname in writable_fieldnames:
                     writable_fieldnames.remove(fieldname)
                     field = self._fields[fieldname]
-                    write_value |= (
-                        self._fit_fieldvalue_for_write(field, fieldvalue) << field.lsb
-                    )
+                    write_value |= self._fit_fieldvalue_for_write(field, fieldvalue) << field.lsb
                 elif fieldname not in self.get_field_names():
-                    _regfile_warn_user(
-                        f"Ignoring non existent Field {fieldname} for write."
-                    )
+                    _regfile_warn_user(f"Ignoring non existent Field {fieldname} for write.")
 
             if writable_fieldnames:
                 _regfile_warn_user(
@@ -216,9 +199,7 @@ class RegisterEntryAbstract(metaclass=abc.ABCMeta):
         elif isinstance(value, RegisterEntry):
             self._set_value(value.get_value(), self.write_mask)
         else:
-            raise TypeError(
-                f"Unable to assign type {type(value)} " f"-- {str(value)}."
-            )  # pragma: nocover
+            raise TypeError(f"Unable to assign type {type(value)} -- {str(value)}.")  # pragma: nocover
 
     def __int__(self):
         """Integer conversion - executes a read"""
@@ -292,9 +273,7 @@ class RegisterEntry(RegisterEntryAbstract):
         with the help of the write_mask"""
         # TODO: sanity check write mask
         self._add_fields_mode = False
-        self._writable_fieldnames = tuple(
-            name for name, _ in self.writable_field_items()
-        )
+        self._writable_fieldnames = tuple(name for name, _ in self.writable_field_items())
 
     def __getitem__(self, key):
         """Add the represent() logic to the dict-like access method"""
@@ -312,8 +291,7 @@ class RegisterEntry(RegisterEntryAbstract):
                     truncreset = reset & field.get_mask()
                     if truncreset != reset:
                         _regfile_warn_user(
-                            f"{key}: reset value 0x{reset >> lsb:x} "
-                            f"is truncated to 0x{truncreset >> lsb:x}."
+                            f"{key}: reset value 0x{reset >> lsb:x} is truncated to 0x{truncreset >> lsb:x}."
                         )  # pragma: nocover
 
                     self._reset |= truncreset
@@ -328,10 +306,7 @@ class RegisterEntry(RegisterEntryAbstract):
 
     def get_reset_values(self):
         """Get iterator object of the tuple (fieldname, resetvalue) for writable fields only."""
-        return {
-            fieldname: field.get_field(self._reset)
-            for fieldname, field in self.writable_field_items()
-        }
+        return {fieldname: field.get_field(self._reset) for fieldname, field in self.writable_field_items()}
 
     def field(self, name):
         """Get the field by name and add callback for UVM-like set() method of fields"""
@@ -340,9 +315,7 @@ class RegisterEntry(RegisterEntryAbstract):
 
             def setfunc(value):
                 self.desired_value &= ~field.get_mask()
-                self.desired_value |= (
-                    self._fit_fieldvalue_for_write(field, value) << field.lsb
-                )
+                self.desired_value |= self._fit_fieldvalue_for_write(field, value) << field.lsb
 
             setattr(field, "set", setfunc)
 
@@ -570,9 +543,7 @@ class Regfile:
 
     def __setattr__(self, name, value):
         if self._lock is True and name not in self.__dict__:
-            raise AttributeError(
-                f"Unable to allocate attribute {name} - Instance is locked."
-            )
+            raise AttributeError(f"Unable to allocate attribute {name} - Instance is locked.")
 
         super().__setattr__(name, value)
 
@@ -620,9 +591,7 @@ class RegfileMemAccess:
 
     def __setitem__(self, index, value):
         self.__check_idx_func(index)
-        self._dev.rfdev_write(
-            self.__base_addr + self._dev.n_word_bytes * index, value, -1, -1
-        )
+        self._dev.rfdev_write(self.__base_addr + self._dev.n_word_bytes * index, value, -1, -1)
 
     def get_rfdev(self):
         return self._dev

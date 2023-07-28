@@ -53,6 +53,10 @@ max-line-length = 120
 [tool.autopep8]
 # E501 - Try to make lines fit within --max-line-length characters.
 ignore = ["E501"]
+
 [tool.isort]
 profile = "black"
 line_length = 120
+
+[tool.black]
+line-length = 120

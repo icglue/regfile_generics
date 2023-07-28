@@ -52,15 +52,12 @@ def test_truncation_warning(sessionsubwordregfile):
 
     with warns(
         UserWarning,
-        match=r"Field\(s\) cfg_trigger_mode were not explicitly set during write "
-        "of register reg1_high!",
+        match=r"Field\(s\) cfg_trigger_mode were not explicitly set during write of register reg1_high!",
     ):
         regfile["reg1_high"] = {"cfg": 0x0BB, "cfg_trigger": 0x1}
     assert rfdev.getvalue(0xF000_0008) == 0x1BB
 
-    with warns(
-        UserWarning, match=r"^Ignoring non existent Field NOT_EXISTENT for write.$"
-    ):
+    with warns(UserWarning, match=r"^Ignoring non existent Field NOT_EXISTENT for write.$"):
         regfile["reg1_high"] = {"NOT_EXISTENT": 0x0FF, "cfg_trigger": 0x1}
 
     assert rfdev.getvalue(0xF000_0008) == 0x100
@@ -89,22 +86,13 @@ def test_read_entry(sessionsubwordregfile):
 
     regfile["reg1_high"] = entry
     assert rfdev.getvalue(0xF000_0008) == 0x00122
-    assert {"cfg": 0x077, "cfg_trigger": 0x0, "cfg_trigger_mode": 0b10} == dict(
-        regfile["reg1_high"].get_dict(0x20077)
-    )
+    assert {"cfg": 0x077, "cfg_trigger": 0x0, "cfg_trigger_mode": 0b10} == dict(regfile["reg1_high"].get_dict(0x20077))
 
-    assert (
-        regfile["reg1_high"].get_value(
-            {"cfg": 0x077, "cfg_trigger": 0x0, "cfg_trigger_mode": 0b10}
-        )
-        == 0x20077
-    )
+    assert regfile["reg1_high"].get_value({"cfg": 0x077, "cfg_trigger": 0x0, "cfg_trigger_mode": 0b10}) == 0x20077
 
     assert write_count + 2 == rfdev.write_count
     assert read_count + 1 == rfdev.read_count
-    assert {"cfg": 0x22, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0} == dict(
-        regfile["reg1_high"].get_dict()
-    )
+    assert {"cfg": 0x22, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0} == dict(regfile["reg1_high"].get_dict())
     assert read_count + 2 == rfdev.read_count
 
 
@@ -118,9 +106,7 @@ def test_int_access(sessionsubwordregfile):
     assert regfile["reg1_low"]["cfg"] == 0xABCD1234
 
     regfile["reg1_high"] = 0x1234ABCD
-    assert {"cfg": 0xCD, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0} == dict(
-        regfile["reg1_high"]
-    )
+    assert {"cfg": 0xCD, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0} == dict(regfile["reg1_high"])
 
     assert regfile["reg1_high"] == 0x1234ABCD
     assert int(regfile["reg1_low"]) == 0xABCD1234

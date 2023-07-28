@@ -18,26 +18,15 @@ class submod_regfile(Regfile):
 
         with self as r:
             with r["reg0"].represent(addr=0x0000, write_mask=0x0000001F) as e:
-                e["cfg"].represent(
-                    bits="4:0", access="RW", reset="0x0", desc="Configure component"
-                )
+                e["cfg"].represent(bits="4:0", access="RW", reset="0x0", desc="Configure component")
                 e["status"].represent(bits="31:16", access="R", desc="Component status")
 
             with r["reg1_low"].represent(addr=0x0004, write_mask=0xFFFFFFFF) as e:
-                e["cfg"].represent(
-                    bits="31:0",
-                    access="RW",
-                    reset="0x0",
-                    desc="Configure submod part 0",
-                )
+                e["cfg"].represent(bits="31:0", access="RW", reset="0x0", desc="Configure submod part 0")
 
             with r["reg1_high"].represent(addr=0x0008, write_mask=0x000301FF) as e:
-                e["cfg"].represent(
-                    bits="7:0", access="RW", reset="0x0", desc="Configure submod part 1"
-                )
-                e["cfg_trigger"].represent(
-                    bits="8", access="RWT", reset="0b0", desc="trigger config update"
-                )
+                e["cfg"].represent(bits="7:0", access="RW", reset="0x0", desc="Configure submod part 1")
+                e["cfg_trigger"].represent(bits="8", access="RWT", reset="0b0", desc="trigger config update")
                 e["cfg_trigger_mode"].represent(
                     bits="17:16",
                     access="RWT",
@@ -46,27 +35,15 @@ class submod_regfile(Regfile):
                 )
 
             with r["reg2"].represent(addr=0x00C0, write_mask=0x000001F0) as e:
-                e["config"].represent(
-                    bits="8:4", access="RW", reset="0x0", desc="Configure component"
-                )
+                e["config"].represent(bits="8:4", access="RW", reset="0x0", desc="Configure component")
                 e["status"].represent(bits="31:16", access="R", desc="Component status")
 
             with r["reg_addr40"].represent(addr=0x0040, write_mask=0x0000001F) as e:
-                e["start"].represent(
-                    bits="0", access="RW", reset="0b0", desc="start's the module"
-                )
-                e["enable_feature0"].represent(
-                    bits="1", access="RW", reset="0b1", desc="enables feature0"
-                )
-                e["enable_feature1"].represent(
-                    bits="2", access="RW", reset="0b0", desc="enables feature1"
-                )
-                e["enable_feature2"].represent(
-                    bits="3", access="RW", reset="0b1", desc="enables feature2"
-                )
-                e["enable_feature3"].represent(
-                    bits="4", access="RW", reset="0b0", desc="enables feature3"
-                )
+                e["start"].represent(bits="0", access="RW", reset="0b0", desc="start's the module")
+                e["enable_feature0"].represent(bits="1", access="RW", reset="0b1", desc="enables feature0")
+                e["enable_feature1"].represent(bits="2", access="RW", reset="0b0", desc="enables feature1")
+                e["enable_feature2"].represent(bits="3", access="RW", reset="0b1", desc="enables feature2")
+                e["enable_feature3"].represent(bits="4", access="RW", reset="0b0", desc="enables feature3")
 
 
 """

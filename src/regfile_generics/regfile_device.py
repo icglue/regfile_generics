@@ -46,20 +46,14 @@ class RegfileDev:
 
         self.callback = kwargs.pop("callback", {})
         if not isinstance(self.callback, dict):
-            raise TypeError(
-                "Argument 'callback' has to dict with name, callback function."
-            )
+            raise TypeError("Argument 'callback' has to dict with name, callback function.")
 
         if not set(self.callback) <= self.allowed_callbacks():
-            raise AttributeError(
-                f"Only {self.allowed_callbacks} are allowed as callback functions."
-            )
+            raise AttributeError(f"Only {self.allowed_callbacks} are allowed as callback functions.")
 
         for func in self.allowed_callbacks() - set(self.callback):
             if not hasattr(self, func):
-                raise TypeError(
-                    f"Function {func} has to be implemented or passed as callback function."
-                )
+                raise TypeError(f"Function {func} has to be implemented or passed as callback function.")
 
     def allowed_callbacks(self):
         return {"rfdev_read", "rfdev_write"}
@@ -81,9 +75,7 @@ class RegfileDev:
                 mask = (1 << (8 * self.n_word_bytes)) - 1
                 write_mask = mask
                 for i, value in enumerate(values):
-                    self.rfdev_write(
-                        start_addr + i * self.n_word_bytes, value, mask, write_mask
-                    )
+                    self.rfdev_write(start_addr + i * self.n_word_bytes, value, mask, write_mask)
 
     def rfdev_read(self, addr):
         """Read method could be overridden when deriving a new RegfileDev"""
@@ -228,15 +220,12 @@ class RegfileDevSubword(RegfileDev):
 
                     # call virtual method
                     self.logger.debug(
-                        "RegfileDevice: Subwrite address 0x%x -- "
-                        "{value: 0x%x, n_subword_bytes: 0x%x}",
+                        "RegfileDevice: Subwrite address 0x%x -- {value: 0x%x, n_subword_bytes: 0x%x}",
                         addr + subword_offset,
                         value,
                         n_subword_bytes,
                     )
-                    self.rfdev_write_subword(
-                        addr + subword_offset, value, n_subword_bytes
-                    )
+                    self.rfdev_write_subword(addr + subword_offset, value, n_subword_bytes)
                     # we are done here ...
                     return
 
@@ -298,9 +287,7 @@ class RegfileDevSubwordDebug(RegfileDevSubword):
         return value
 
     def rfdev_write_subword(self, addr, value, size):
-        print(
-            f"{self._prefix}REGFILE-WRITING to addr 0x{addr:x} value 0x{value:x} size=0x{size:x}"
-        )
+        print(f"{self._prefix}REGFILE-WRITING to addr 0x{addr:x} value 0x{value:x} size=0x{size:x}")
 
         byte_values = value.to_bytes(self.n_word_bytes, "little")
         for i in range(size):
@@ -358,6 +345,4 @@ class StringCmdRegfileDevSubword(RegfileDevSubword):
         bsel = ((1 << size) - 1) << (addr & subword_addrbits)
         addr_aligned = addr & ~subword_addrbits
 
-        self.execute(
-            f"w{8*self.n_word_bytes} 0x{addr_aligned:x} 0x{value:x} 0x{bsel:x}"
-        )
+        self.execute(f"w{8*self.n_word_bytes} 0x{addr_aligned:x} 0x{value:x} 0x{bsel:x}")
