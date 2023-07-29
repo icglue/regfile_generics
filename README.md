@@ -1,12 +1,15 @@
 # regfile\_generics
 
 [![BSD License][bsdlicense-button]][bsdlicense]
+[![PyPI][pypi-button]][pypi]
 [![Build Status][build-button]][build]
 [![Coverage Status][codecov-button]][codecov]
 [![Code style: black][black-button]][black]
 
 [bsdlicense-button]: https://img.shields.io/github/license/icglue/regfile_generics
 [bsdlicense]: https://opensource.org/license/bsd-2-clause/
+[pypi-button]: https://img.shields.io/pypi/v/regfile_generics
+[pypi]: https://pypi.org/project/regfile-generics/
 [build-button]: https://github.com/icglue/regfile_generics/workflows/CI/badge.svg?event=push
 [build]: https://github.com/icglue/regfile_generics/actions?query=workflow%3ACI+event%3Apush
 [codecov-button]: https://codecov.io/gh/icglue/regfile_generics/branch/master/graph/badge.svg

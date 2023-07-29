@@ -2,10 +2,12 @@
 # ----------------------
 coverage:
   status:
-    patch: false
+    patch:
+      default:
+        informational: true
 
 # Ignoring Paths
 # --------------
 # which folders/files to ignore
 ignore:
-  - */tests/.*
+-  ^tests/.*\Z
