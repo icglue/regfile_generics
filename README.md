@@ -37,8 +37,8 @@ python3 -m pip install .
 
 ## Setup Regfile and Regfile Device for Access
 
-See [tests/fixtures.py](tests/fixtures.py) how to create a regfile by deriving from the Regfile class.
-Implement read/write functions and pass them (or overwrite while deriving) to an adequate [RegfileDevice](src/regfile_generics/regfile_device.py) class.
+See [tests/fixtures.py](https://github.com/icglue/regfile_generics/blob/master/tests/fixtures.py) how to create a regfile by deriving from the Regfile class.
+Implement read/write functions and pass them (or overwrite while deriving) to an adequate [RegfileDevice](https://github.com/icglue/regfile_generics/blob/master/src/regfile_generics/regfile_device.py) class.
 
 ## Accessing Registers
 
@@ -48,16 +48,20 @@ Implement read/write functions and pass them (or overwrite while deriving) to an
     # or single field (might issue read-modify-write)
     regfile["reg1_high"]["cfg"] = 0xB
 
-    # uvm like:
-    regfile.reg2_r.config_f.set(2)
-    regfile.reg2_r.update()
+    # uvm like (register have a _r suffix, field a _f suffix to avoid collisions):
+    regfile.reg1_high_r.cfg_f.set(2)
+    regfile.reg1_high_r.update()
 
     # write_update
-    regfile["reg_addr40_r"].write_update(start=1, enable_feature0=0, enable_feature1=0)
+    regfile["reg1_high_r"].write_update(cfg=0xA, cfg_trigger_mode=1)
 
     # read (can be int or dict or string context)
-    assert entry["cfg"] == 0x22
-    print(entry["cfg"])
+    assert regfile["reg1_high"] == 0x22
+    print(regfile["reg1_high"])
 
-    # read entire entry to an variable, so that no further read request will be issued
+    # read entire entry to a variable, so that no further read request will be issued
+    rh1 = regfile["reg1_high"].read_entry()
+    print(f"cfg: {rh1['cfg']"}
+    print(f"trigger: {rh1['cfg_trigger']"}
+    print(f"mode: {rh1['cfg_trigger_mode']"}
 ```
