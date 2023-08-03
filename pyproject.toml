@@ -13,7 +13,7 @@ name = "regfile_generics"
 dynamic = ['version']
 description = "Python abstraction layer for registerfile access"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 authors = [
     {name = "Felix Neumärker", email = "felix.neumaerker@icglue.org"},
     {name = "Andreas Dixius", email = "andreas.dixius@icglue.org"},

@@ -10,7 +10,11 @@ test:
 	coverage report -m
 
 lint:
-	black --check .
+	mypy src/regfile_generics tests
 	pylint src/regfile_generics --disable=fixme
+	black --check .
+
+html:
+	+$(MAKE) -C docs html
 
 .PHONY: build deploy tests

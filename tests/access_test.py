@@ -1,5 +1,8 @@
 """Regfile access tests"""
+
 from pytest import warns
+
+from .fixtures import FixtureSimpleRegfile
 
 # pylint: disable=line-too-long,missing-function-docstring
 
@@ -124,16 +127,14 @@ def test_get_reset_values(sessionsubwordregfile):
     }
 
 
-def test_rfdev_simple(sessionsimpleregfile):
+def test_rfdev_simple(sessionsimpleregfile: FixtureSimpleRegfile):
     regfile, rfdev = sessionsimpleregfile
 
-    print("write")
     regfile["reg1_high"] = {"cfg": 0x07A, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0}
 
     write_count = rfdev.write_count
     read_count = rfdev.read_count
 
-    print("compare")
     assert rfdev.getvalue(0xF000_0008) == 0x0000_017A
 
     # read-modify-write
@@ -157,11 +158,9 @@ def test_mem(sessionmemregfile):
 
     regfile.write_image(0x8, tuple(i for i in range(16)))
 
-    print(rfdev.mem)
     for i in range(16):
         assert rfdev.mem[0xA000_0000 + 0x8 + i * rfdev.n_word_bytes] == i
 
     image = regfile.read_image(0xC, 15)
-    print(image)
     for i in range(15):
         assert image[i] == i + 1

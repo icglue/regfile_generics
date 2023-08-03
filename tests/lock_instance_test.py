@@ -11,7 +11,7 @@ def test_regfile_attribute_exception(sessionsubwordregfile):
 
 def test_regfile_entry_attribute_exception(sessionsubwordregfile):
     regfile, rfdev = sessionsubwordregfile
-    entry = regfile["reg1_high"].get_register_entry(0x1)
+    entry = regfile["reg1_high"].get_reg(0x1)
     with pytest.raises(Exception):
         entry.cfg_f = 0xDEAD
     with pytest.raises(Exception):

@@ -1,4 +1,4 @@
-# Copyright (C) 2020-2021 Andreas Dixius, Felix Neumärker
+# Copyright (C) 2020-2023 Andreas Dixius, Felix Neumärker
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -21,9 +21,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-"""
-Generic Device on which a regfile can operate
-"""
+"""Generic Devices on which a regfile can operate."""
 
 from __future__ import annotations
 
@@ -34,61 +32,86 @@ import struct
 import sys
 import traceback
 import warnings
-
-# pylint: disable=missing-class-docstring, missing-function-docstring
-
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
     from .regfile import RegfileEntry
+    from typing import Callable, Optional
 
 
 class RegfileDev:
-    def __init__(self, **kwargs):
-        super().__init__()
-        self.n_word_bytes = kwargs.pop("bytes_per_word", 4)
-        self.logger = kwargs.pop("logger", logging.getLogger(__name__))
-        self._prefix = kwargs.pop("prefix", "")
-        self._blockread = kwargs.pop("blockread", None)
-        self._blockwrite = kwargs.pop("blockwrite", None)
+    """Regfile Device class that handels the access of a Regfile
 
-        self.callback = kwargs.pop("callback", {})
+    :param callback: dict with rfdev_read/rfdev_write/blockread/blockwrite
+                   pointing to a register read/write function
+    :param bytes_per_word: bytes per word a single register access can handle (default 4)
+    :param logger: logger instance
+    :param prefix: prefix for (debug) logging with the logger instance
+
+    .. deprecated:: 0.2.0
+
+      :key blockread: reference to a blockread function, use callback dict instead
+      :key blockwrite: reference to a blockwrite function, use callback dict instead"""
+
+    def __init__(
+        self,
+        callback: Optional[dict[str, Callable]] = None,
+        bytes_per_word: int = 4,
+        logger: Optional[logging.Logger] = None,
+        prefix: str = "",
+        **kwargs,
+    ):
+        super().__init__()
+        self._bytes_per_word = bytes_per_word
+        self.logger = logger if logger else logging.getLogger(__name__)
+        self._prefix = prefix
+        self.callback = callback if callback else {}
+
+        for blockop in ("blockread", "blockwrite"):
+            if blockop in kwargs:
+                warnings.warn(
+                    f"RegfileDev init - kwarg {blockop} has been deprecated use the callback dict instead.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+                self.callback[blockop] = kwargs[blockop]
+
         if not isinstance(self.callback, dict):
             raise TypeError("Argument 'callback' has to dict with name, callback function.")
 
-        if not set(self.callback) <= self.allowed_callbacks():
-            raise AttributeError(f"Only {self.allowed_callbacks} are allowed as callback functions.")
+        if not set(self.callback) <= self._allowed_callbacks():
+            raise AttributeError(f"Only {self._allowed_callbacks} are allowed as callback functions.")
 
-        for func in self.allowed_callbacks() - set(self.callback):
+        for func in self._allowed_callbacks() - set(self.callback):
             if not hasattr(self, func):
                 raise TypeError(f"Function {func} has to be implemented or passed as callback function.")
 
-    def allowed_callbacks(self):
+    def _allowed_callbacks(self) -> set[str]:
+        """Returns allowed keys to be passed as inside the callback argument while class initialization"""
         return {"rfdev_read", "rfdev_write"}
 
-    def readwrite_block(self, start_addr, values, write):
-        """.. deprecated:: 0.1.1
+    @property
+    def n_word_bytes(self) -> int:
+        """Returs the number of bytes per word the device handles on one operation."""
+        return self._bytes_per_word
 
-        Use :func:`blockread` or :func:`blockwrite` instead."""
+    def blockread(self, start_addr: int, size: int) -> list[int]:
+        """Initiate a blockread used for
 
-        warnings.warn("This functions is deprecated and will be removed in future versions.", UserWarning, stacklevel=2)
-        if not write:
-            read_value = self.blockread(start_addr, len(values))
-            for i in range(len(values)):  # pylint: disable=consider-using-enumerate
-                # Modifications are be done by reference
-                values[i] = read_value[i]
-        else:
-            self.blockwrite(start_addr, values)
-
-    def blockread(self, start_addr, size):
-        if self._blockread:
-            return self._blockread(start_addr, size)
+        :param start_addr: start address of read data
+        :param size: number of words to be read"""
+        if "blockread" in self.callback:
+            return self.callback["blockread"](start_addr, size)
 
         return [self.rfdev_read(start_addr + i * self.n_word_bytes) for i in range(size)]
 
-    def blockwrite(self, start_addr, values):
-        if self._blockwrite:
-            self._blockwrite(start_addr, values)
+    def blockwrite(self, start_addr: int, values: list[int]) -> None:
+        """Initiate a blockwrite used for memory access
+        :param start_addr: start address of write data
+        :param value: word list to be written"""
+
+        if "blockwrite" in self.callback:
+            self.callback["blockwrite"](start_addr, values)
             return
 
         mask = (1 << (8 * self.n_word_bytes)) - 1
@@ -96,11 +119,17 @@ class RegfileDev:
         for i, value in enumerate(values):
             self.rfdev_write(start_addr + i * self.n_word_bytes, value, mask, write_mask)
 
-    def rfdev_read(self, addr):
-        """Read method could be overridden when deriving a new RegfileDev"""
+    def rfdev_read(self, addr: int) -> int:
+        """Read method calling `rfdev_read` of callback dict passed upon init
+        - could be overridden, when deriving a new RegfileDev"""
         return self.callback["rfdev_read"](addr)
 
-    def read(self, baseaddr, entry):
+    def read(self, baseaddr: int, entry: RegfileEntry) -> int:
+        """Read a register entry relative to a base address
+
+        :param baseaddr: Base address of the Register File
+        :param entry: A register entry
+        """
         value = self.rfdev_read(baseaddr + entry.addr)
         self.logger.debug(
             "%sRegfileDevice reading entry %s from address 0x%x = 0x%x",
@@ -111,11 +140,27 @@ class RegfileDev:
         )
         return value
 
-    def rfdev_write(self, addr, value, mask, write_mask):
-        """Read method could be overridden when deriving a new RegfileDev"""
+    def rfdev_write(self, addr: int, value: int, mask: int, write_mask: int) -> None:
+        """Read method could be overridden when deriving a new RegfileDev
+        default implementation is to call the function passed while initialization,
+        through the value of the "rfdev_write"-key of the callback dictionary.
+
+        :param addr: Absolute Address to be accessed for write
+        :param value: Value to be written
+        :param mask: Mask for the write operation to the register
+        :param write_mask: Mask of writeable bits inside the register
+          (e.g. to determine if read-modify-write is necessary)
+        """
         self.callback["rfdev_write"](addr, value, mask, write_mask)
 
-    def write(self, baseaddr, entry, value, mask):
+    def write(self, baseaddr: int, entry: RegfileEntry, value: int, mask: int) -> None:
+        """Read a register entry relative to a base address
+
+        :param baseaddr: Base address of the Register File
+        :param entry: A register entry
+        :param value: register value
+        :param mask:  mask for the operation
+        """
         addr = baseaddr + entry.addr
 
         self.logger.debug(
@@ -130,9 +175,56 @@ class RegfileDev:
         )
         self.rfdev_write(addr, value, mask, entry.write_mask)
 
+    def readwrite_block(self, start_addr, values, write):
+        """.. deprecated:: 0.2.0
+
+        Use :func:`blockread` or :func:`blockwrite` instead."""
+
+        warnings.warn(
+            "Function `readwrite_block()` is deprecated and will be removed in future versions.",
+            UserWarning,
+            stacklevel=2,
+        )
+        if not write:
+            read_value = self.blockread(start_addr, len(values))
+            for i in range(len(values)):  # pylint: disable=consider-using-enumerate
+                # Modifications are be done by reference
+                values[i] = read_value[i]
+        else:
+            self.blockwrite(start_addr, values)
+
 
 class RegfileDevSimple(RegfileDev):
-    def rfdev_write(self, addr, value, mask, write_mask):
+    """RegfileDev that operates on words only (implements read-modify-write if necessary)
+
+    Derived from :class:`.RegfileDev`
+
+    Allowed callback entries:
+
+        :key rfdev_read: read function (signature :func:`.RegfileDev.rfdev_read`)
+        :key rfdev_write_simple: write function which has the same signature like :func:`rfdev_write_simple`
+    """
+
+    def _allowed_callbacks(self) -> set[str]:
+        return {"rfdev_read", "rfdev_write_simple"}
+
+    def rfdev_write_simple(self, addr: int, value: int) -> None:
+        """Simple write operation - calls back `rfdev_write_simple` if passed to constructor.
+
+        :param addr: absolute address for write operation
+        :param value: value to write
+        """
+        self.callback["rfdev_write_simple"](addr, value)
+
+    def rfdev_write(self, addr: int, value: int, mask: int, write_mask: int) -> None:
+        """:class:`.RegfileDev` rfdev_write implementations
+        - executes the read-modify-write if necessary
+
+        :param addr: absolute Address to be accessed for write
+        :param value: value to be written
+        :param mask: mask for the write operation to the register
+        :param write_mask: mask of writeable bits inside the register"""
+
         keep_mask = ~mask & write_mask
 
         if keep_mask == 0:
@@ -146,24 +238,20 @@ class RegfileDevSimple(RegfileDev):
 
             self.rfdev_write_simple(addr, rmw_value)
 
-    def allowed_callbacks(self):
-        return {"rfdev_read", "rfdev_write_simple"}
 
-    def rfdev_write_simple(self, addr, value):
-        self.callback["rfdev_write_simple"](addr, value)
-
-
-def regfile_dev_debug_getbits(interactive, default_value, promptprefix):
+def regfile_dev_debug_getbits(interactive: bool, default_value: int, promptprefix: str) -> int:
+    """Function to get bits for RegfileDebug* classes"""
     if not interactive:
         print(f"{promptprefix} value: 0x{default_value:x}")
         return default_value
 
-    lasttrace = []
+    # pragma nocover
+    lasttrace: Optional[traceback.FrameSummary] = None
     regfile_generics_package_path = os.path.dirname(__file__)
 
     for stacktrace in traceback.extract_stack():
         if stacktrace[0].startswith(regfile_generics_package_path):
-            if lasttrace:
+            if lasttrace is not None:
                 print(f"{lasttrace[0]}:{lasttrace[1]}: {lasttrace[3]}", file=sys.stderr)
             break
         lasttrace = stacktrace
@@ -179,24 +267,27 @@ def regfile_dev_debug_getbits(interactive, default_value, promptprefix):
 
 
 class RegfileDevSimpleDebug(RegfileDevSimple):
-    def __init__(self, **kwargs):
+    """Debug implementation of :class:`.RegfileDevSimple`
+
+    :param interactive: if set to ``True`` the regfile device will request a user input upon read.
+    """
+
+    def __init__(self, interactive: bool = False, **kwargs):
         super().__init__(**kwargs)
-        self.mem = {}
+        self.mem: dict[int, int] = {}
         self.write_count = 0
         self.read_count = 0
-        kwargs.setdefault("interactive", False)
-        self.__interactive = kwargs["interactive"]
+        self.__interactive = interactive
 
-    def rfdev_read(self, addr):
-        if addr not in self.mem:
-            value = random.getrandbits(8 * self.n_word_bytes)
-            print(f"Generating random regfile value {value}.")
-        else:
-            value = self.mem[addr]
+    def rfdev_read(self, addr: int) -> int:
+        """Debug read function interactive if necessary
+
+        :param: addr address
+        """
 
         value = regfile_dev_debug_getbits(
             self.__interactive,
-            value,
+            self.getvalue(addr),
             f"{self._prefix}REGFILE-READING from addr 0x{addr:x}",
         )
         self.mem[addr] = value
@@ -204,21 +295,40 @@ class RegfileDevSimpleDebug(RegfileDevSimple):
         self.read_count += 1
         return value
 
-    def rfdev_write_simple(self, addr, value):
+    def rfdev_write_simple(self, addr: int, value: int) -> None:
+        """Debug write function to `mem` attribute.
+
+        :param addr: absolute address for write operation
+        :param value: value to write
+        """
         print(f"{self._prefix}REGFILE-WRITING to addr 0x{addr:x} value 0x{value:x}")
         self.mem[addr] = value
         self.write_count += 1
 
-    def getvalue(self, addr):
+    def getvalue(self, addr: int) -> int:
+        """Get value out of the memory, randomize if necessary.
+
+        :param addr: address to be read"""
         if addr not in self.mem:
             value = random.getrandbits(8 * self.n_word_bytes)
-            self.mem[addr] = value
+            self.logger.info("Generating random regfile value 0x%x", value)
+            return value
 
         return self.mem[addr]
 
 
 class RegfileDevSubword(RegfileDev):
-    def rfdev_write(self, addr, value, mask, write_mask):
+    """RegfileDev that operates on word sizes (implements read-modify-write if this)
+
+    Derived from :class:`.RegfileDev`
+
+    Allowed callback entries:
+
+        :key rfdev_read: read function (signature :func:`.RegfileDev.rfdev_read`)
+        :key rfdev_write_simple: write function which has the same signature like :func:`rfdev_write_simple`
+    """
+
+    def rfdev_write(self, addr: int, value: int, mask: int, write_mask: int) -> None:
         # register bits that must not be changed
         keep_mask = ~mask & write_mask
 
@@ -262,23 +372,38 @@ class RegfileDevSubword(RegfileDev):
         # call virtual method
         self.rfdev_write_subword(addr, rmw_value, self.n_word_bytes)
 
-    def allowed_callbacks(self):
+    def _allowed_callbacks(self) -> set[str]:
         return {"rfdev_read", "rfdev_write_subword"}
 
-    def rfdev_write_subword(self, addr, value, size):
+    def rfdev_write_subword(self, addr: int, value: int, size: int) -> None:
+        """Word size write operation - calls back `rfdev_write_subword` if passed to constructor.
+
+        :param addr: absolute address for write operation (lower address bit indicate word position)
+        :param value: value to write
+        :param size: number of bytes to write
+        """
         self.callback["rfdev_write_subword"](addr, value, size)
 
 
 class RegfileDevSubwordDebug(RegfileDevSubword):
-    def __init__(self, **kwargs):
+    """Debug implementation of :class:`.RegfileDevSimple`
+
+    :param interactive: if set to ``True`` the regfile device will request a user input upon read.
+    """
+
+    def __init__(self, interactive: bool = False, **kwargs):
         super().__init__(**kwargs)
-        kwargs.setdefault("interactive", False)
-        self.__interactive = kwargs["interactive"]
-        self.mem = {}
+        self.__interactive = interactive
+        self.mem: dict[int, int] = {}
         self.write_count = 0
         self.read_count = 0
 
-    def getvalue(self, addr):
+    def getvalue(self, addr: int) -> int:
+        """Return memory value
+
+        :param addr: address were the data will be read
+        """
+
         word = []
         for i in range(self.n_word_bytes):
             if (addr + i) not in self.mem:
@@ -291,7 +416,12 @@ class RegfileDevSubwordDebug(RegfileDevSubword):
 
         return int.from_bytes(struct.pack(f"{self.n_word_bytes}B", *word), "little")
 
-    def rfdev_read(self, addr):
+    def rfdev_read(self, addr: int) -> int:
+        """Debug read function interactive if necessary
+
+        :param: addr address
+        """
+
         value = self.getvalue(addr)
 
         value = regfile_dev_debug_getbits(
@@ -305,7 +435,7 @@ class RegfileDevSubwordDebug(RegfileDevSubword):
         self.read_count += 1
         return value
 
-    def rfdev_write_subword(self, addr, value, size):
+    def rfdev_write_subword(self, addr: int, value: int, size: int) -> None:
         print(f"{self._prefix}REGFILE-WRITING to addr 0x{addr:x} value 0x{value:x} size=0x{size:x}")
 
         byte_values = value.to_bytes(self.n_word_bytes, "little")
@@ -327,15 +457,24 @@ class StringCmdRegfileDevSimple(RegfileDevSimple):
              e.g. w32 0x80 0xF9852A
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, execute: Optional[Callable[[str], Optional[str]]] = None, **kwargs):
         super().__init__(**kwargs)
-        self.execute = kwargs["execute"]
+        self.execute = execute
 
-    def rfdev_read(self, addr):
-        return int(self.execute(f"r{8*self.n_word_bytes} 0x{addr:x}"), 0)
+    def rfdev_read(self, addr: int) -> int:
+        """Debug read function implementation translates to :func:`execute()`
 
-    def rfdev_write_simple(self, addr, value):
-        self.execute(f"w{8*self.n_word_bytes} 0x{addr:x} 0x{value:x}")
+        :param addr: absolute address for read operation"""
+
+        return int(cast(Callable[[str], str], self.execute)(f"r{8*self.n_word_bytes} 0x{addr:x}"), 0)
+
+    def rfdev_write_simple(self, addr: int, value: int):
+        """Debug write function implementation translates to :func:`execute()`
+
+        :param addr: absolute address for write operation
+        :param value: value to write"""
+
+        cast(Callable[[str], None], self.execute)(f"w{8*self.n_word_bytes} 0x{addr:x} 0x{value:x}")
 
 
 class StringCmdRegfileDevSubword(RegfileDevSubword):
@@ -356,10 +495,10 @@ class StringCmdRegfileDevSubword(RegfileDevSubword):
         super().__init__(**kwargs)
         self.execute = kwargs["execute"]
 
-    def rfdev_read(self, addr):
+    def rfdev_read(self, addr: int) -> int:
         return int(self.execute(f"r{8*self.n_word_bytes} 0x{addr:x}"), 0)
 
-    def rfdev_write_subword(self, addr, value, size):
+    def rfdev_write_subword(self, addr: int, value: int, size: int) -> None:
         subword_addrbits = self.n_word_bytes.bit_length() - 1
         bsel = ((1 << size) - 1) << (addr & subword_addrbits)
         addr_aligned = addr & ~subword_addrbits
