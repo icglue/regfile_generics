@@ -602,10 +602,30 @@ class RegfileMemAccess:
     def get_base_addr(self):
         return self.__base_addr
 
-    def read_image(self, addr, size):
-        image = size * [0]
-        self._dev.readwrite_block(self.__base_addr + addr, image, False)
-        return image
+    def read_image(self, addr, size) -> list[int]:
+        from .regfile_device import RegfileDev  # pylint: disable=import-outside-toplevel
 
-    def write_image(self, addr, image):
-        self._dev.readwrite_block(self.__base_addr + addr, image, True)
+        if type(self._dev).readwrite_block is not RegfileDev.readwrite_block:
+            warnings.warn(
+                f"Overriding function readwrite_block in {type(self._dev)} is deprecated"
+                " and will not be support in future versions.",
+                UserWarning,
+            )
+            image = size * [0]
+            self._dev.readwrite_block(self.__base_addr + addr, image, False)
+            return image
+
+        return self._dev.blockread(self.__base_addr + addr, size)
+
+    def write_image(self, addr, image) -> None:
+        from .regfile_device import RegfileDev  # pylint: disable=import-outside-toplevel
+
+        if type(self._dev).readwrite_block is not RegfileDev.readwrite_block:
+            warnings.warn(
+                f"Overriding function readwrite_block in {type(self._dev)} is deprecated"
+                " and will not be support in future versions.",
+                UserWarning,
+            )
+            self._dev.readwrite_block(self.__base_addr + addr, image, True)
+            return
+        self._dev.blockwrite(self.__base_addr + addr, image)

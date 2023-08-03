@@ -25,14 +25,22 @@
 Generic Device on which a regfile can operate
 """
 
+from __future__ import annotations
+
 import logging
 import os
 import random
 import struct
 import sys
 import traceback
+import warnings
 
 # pylint: disable=missing-class-docstring, missing-function-docstring
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .regfile import RegfileEntry
 
 
 class RegfileDev:
@@ -59,23 +67,34 @@ class RegfileDev:
         return {"rfdev_read", "rfdev_write"}
 
     def readwrite_block(self, start_addr, values, write):
+        """.. deprecated:: 0.1.1
+
+        Use :func:`blockread` or :func:`blockwrite` instead."""
+
+        warnings.warn("This functions is deprecated and will be removed in future versions.", UserWarning, stacklevel=2)
         if not write:
-            if self._blockread:
-                for i, data in enumerate(self._blockread(start_addr, len(values))):
-                    # Modifications are be done by reference
-                    values[i] = data
-            else:
-                for i in range(len(values)):  # pylint: disable=consider-using-enumerate
-                    # Modifications are be done by reference
-                    values[i] = self.rfdev_read(start_addr + i * self.n_word_bytes)
+            read_value = self.blockread(start_addr, len(values))
+            for i in range(len(values)):  # pylint: disable=consider-using-enumerate
+                # Modifications are be done by reference
+                values[i] = read_value[i]
         else:
-            if self._blockwrite:
-                self._blockwrite(start_addr, values)
-            else:
-                mask = (1 << (8 * self.n_word_bytes)) - 1
-                write_mask = mask
-                for i, value in enumerate(values):
-                    self.rfdev_write(start_addr + i * self.n_word_bytes, value, mask, write_mask)
+            self.blockwrite(start_addr, values)
+
+    def blockread(self, start_addr, size):
+        if self._blockread:
+            return self._blockread(start_addr, size)
+
+        return [self.rfdev_read(start_addr + i * self.n_word_bytes) for i in range(size)]
+
+    def blockwrite(self, start_addr, values):
+        if self._blockwrite:
+            self._blockwrite(start_addr, values)
+            return
+
+        mask = (1 << (8 * self.n_word_bytes)) - 1
+        write_mask = mask
+        for i, value in enumerate(values):
+            self.rfdev_write(start_addr + i * self.n_word_bytes, value, mask, write_mask)
 
     def rfdev_read(self, addr):
         """Read method could be overridden when deriving a new RegfileDev"""
