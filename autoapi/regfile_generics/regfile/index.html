@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>regfile_generics.regfile &mdash; regfile_generics  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="regfile_generics.regfile_device" href="../regfile_device/index.html" />
+    <link rel="prev" title="regfile_generics" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            regfile_generics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../regfile_device/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile_device</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">regfile_generics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/regfile_generics/regfile/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-regfile_generics.regfile">
+<span id="regfile-generics-regfile"></span><h1><a class="reference internal" href="#module-regfile_generics.regfile" title="regfile_generics.regfile"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile</span></code></a><a class="headerlink" href="#module-regfile_generics.regfile" title="Permalink to this heading"></a></h1>
+<p>Generic Regfile file access through names / items operator of the regfile class</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterEntry</span></code></a></p></td>
+<td><p>Decompose access of a register into fields.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileEntry</span></code></a></p></td>
+<td><p>RegfileEntry belonging to a <a class="reference internal" href="#regfile_generics.regfile.Regfile" title="regfile_generics.regfile.Regfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Regfile</span></code></a> which is callback on access</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#regfile_generics.regfile.Regfile" title="regfile_generics.regfile.Regfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Regfile</span></code></a></p></td>
+<td><p>A Regfile handles multiple <a class="reference internal" href="#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileEntry</span></code></a> items.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#regfile_generics.regfile.RegfileMemAccess" title="regfile_generics.regfile.RegfileMemAccess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileMemAccess</span></code></a></p></td>
+<td><p>Handling Memory through a regfile device.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterField</span></code></a></p></td>
+<td><p>Register Field data container</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.regfile.</span></span><span class="sig-name descname"><span class="pre">RegisterEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry" title="Permalink to this definition"></a></dt>
+<dd><p>Decompose access of a register into fields.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> are specified, they are passed to the <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry.represent" title="regfile_generics.regfile.RegisterEntry.represent"><code class="xref py py-func docutils literal notranslate"><span class="pre">represent()</span></code></a> function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.represent">
+<span class="sig-name descname"><span class="pre">represent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mirrored_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.represent" title="Permalink to this definition"></a></dt>
+<dd><p>Used upon initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>write_mask</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>fields</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField"><em>RegisterField</em></a><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>regfile</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#regfile_generics.regfile.Regfile" title="regfile_generics.regfile.Regfile"><em>Regfile</em></a><em>]</em>) – </p></li>
+<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>reset</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>mirrored_value</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__getitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Dict-like access tor read a value from a field of the register-entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – Name of the register-field.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__setitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Dict-like access to write a value to a field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – name of the register field</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – value to be written to the field</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.write_update">
+<span class="sig-name descname"><span class="pre">write_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.write_update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the register.</p>
+<p>This function takes a dict as argument containing key/value of the fields to be written
+or kwargs with fieldnames/values</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">submodregfile</span><span class="p">[</span><span class="s2">&quot;reg0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">write_update</span><span class="p">(</span><span class="n">cfg</span><span class="o">=</span><span class="mb">0b0_0100</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_reg">
+<span class="sig-name descname"><span class="pre">get_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_reg" title="Permalink to this definition"></a></dt>
+<dd><p>Return a new RegisterEntry (shallow copy).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Value to be hold by the new RegisterEntry,
+if value is not the value will be taken from the original instance</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.read_entry">
+<span class="sig-name descname"><span class="pre">read_entry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.read_entry" title="Permalink to this definition"></a></dt>
+<dd><p>Reads the value and returns a new RegisterEntry (alias of <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry.get_reg" title="regfile_generics.regfile.RegisterEntry.get_reg"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_reg()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_dict">
+<span class="sig-name descname"><span class="pre">get_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Get dictionary field view of the register.</p>
+<p>If value is not specified a read will be executed,
+otherwise the value is decomposed to the fields</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Integer value that should be decomposed</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_name" title="Permalink to this definition"></a></dt>
+<dd><p>Get the name of the register, if set otherwise return UNNAMED</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_field_names">
+<span class="sig-name descname"><span class="pre">get_field_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_field_names" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a copy of the field’s dictionary’s list of keys (fieldnames).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.KeysView[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_writable_fieldnames">
+<span class="sig-name descname"><span class="pre">get_writable_fieldnames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_writable_fieldnames" title="Permalink to this definition"></a></dt>
+<dd><p>Return a copied list containing all writable fieldnames</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_reset_values">
+<span class="sig-name descname"><span class="pre">get_reset_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_reset_values" title="Permalink to this definition"></a></dt>
+<dd><p>Get iterator object of the tuple (fieldname, resetvalue) for writable fields only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.field">
+<span class="sig-name descname"><span class="pre">field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.field" title="Permalink to this definition"></a></dt>
+<dd><p>Get the field by name and add callback for UVM-like set() method of fields</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField">RegisterField</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.items" title="Permalink to this definition"></a></dt>
+<dd><p>Providing all (fieldname, field) tuples for for self-inspection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.ItemsView[str, <a class="reference internal" href="#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField">RegisterField</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__iter__" title="Permalink to this definition"></a></dt>
+<dd><p>Iterator over the (name, int) mainly for dict() conversion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.Iterator[tuple[str, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__setattr__">
+<span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__setattr__" title="Permalink to this definition"></a></dt>
+<dd><p>Enforce that no new attributes are set when the instance is frozen.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__str__" title="Permalink to this definition"></a></dt>
+<dd><p>Read the register and format it decomposed as fields as well as integer value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_value" title="Permalink to this definition"></a></dt>
+<dd><p>Return the integer view of the register.
+If field_dict is not specified a read will be executed,
+otherwise the dict is composed to get the integer value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>field_dict</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.set_value" title="Permalink to this definition"></a></dt>
+<dd><p>Set the value of register. The value can be an integer a dict or
+a register object (e.g. obtained by <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry.get_reg" title="regfile_generics.regfile.RegisterEntry.get_reg"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_reg()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry"><em>RegfileEntry</em></a><em>]</em>) – new value for the register</p></li>
+<li><p><strong>mask</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – write mask for the register</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__enter__">
+<span class="sig-name descname"><span class="pre">__enter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__enter__" title="Permalink to this definition"></a></dt>
+<dd><p>The with statement allows to add fields to the register -</p>
+<dl class="simple">
+<dt>with reg as add_fields_register:</dt><dd><p>add_fields_register.represent(name=”FIELDNAME”, bits=(msb,lsb), reset=0x0, …)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_RepresentDict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__exit__">
+<span class="sig-name descname"><span class="pre">__exit__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exception_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_traceback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__exit__" title="Permalink to this definition"></a></dt>
+<dd><p>Lock the register fields - sort-out the writable_fieldnames
+with the help of the write_mask</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__getattr__">
+<span class="sig-name descname"><span class="pre">__getattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__getattr__" title="Permalink to this definition"></a></dt>
+<dd><p>Allow member access of fields - must have ‘_f’ as suffix (&lt;FIELDNAME&gt;_f).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.read" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Read the current value from this register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Return the desired value of the fields in the register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_mirrored_value">
+<span class="sig-name descname"><span class="pre">get_mirrored_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_mirrored_value" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Return the mirrored value of the fields in the register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_mirrored_dict">
+<span class="sig-name descname"><span class="pre">get_mirrored_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_mirrored_dict" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Variation of get_mirrored_value() return a dict instead of an int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_mirrored_reg">
+<span class="sig-name descname"><span class="pre">get_mirrored_reg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_mirrored_reg" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Variation of get_mirrored_value() return a reg instead of an int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.set" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Set the desired value for this register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.needs_update">
+<span class="sig-name descname"><span class="pre">needs_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.needs_update" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Returns True if any of the fields need updating</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.update" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Updates the content of the register in the design
+to match the desired value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.write" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Write the specified value in this register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.reset" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Reset the desired/mirrored value for this register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_reset">
+<span class="sig-name descname"><span class="pre">get_reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_reset" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Get the specified reset value for this register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_field_by_name">
+<span class="sig-name descname"><span class="pre">get_field_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_field_by_name" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Return the fields in this register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField">RegisterField</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_offset">
+<span class="sig-name descname"><span class="pre">get_offset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_offset" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Returns the offset of this register.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_address">
+<span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_address" title="Permalink to this definition"></a></dt>
+<dd><p>UVM-like - Returns the base external physical address of this register</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__int__">
+<span class="sig-name descname"><span class="pre">__int__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__int__" title="Permalink to this definition"></a></dt>
+<dd><p>Integer conversion - executes a read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__eq__" title="Permalink to this definition"></a></dt>
+<dd><p>Equal comparison with integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__ne__">
+<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__ne__" title="Permalink to this definition"></a></dt>
+<dd><p>Not equal comparison with integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__lt__">
+<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__lt__" title="Permalink to this definition"></a></dt>
+<dd><p>Less-than comparison with integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__le__">
+<span class="sig-name descname"><span class="pre">__le__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__le__" title="Permalink to this definition"></a></dt>
+<dd><p>Less-than/equal comparison with integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__gt__">
+<span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__gt__" title="Permalink to this definition"></a></dt>
+<dd><p>Greater-than comparison with integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.__ge__">
+<span class="sig-name descname"><span class="pre">__ge__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.__ge__" title="Permalink to this definition"></a></dt>
+<dd><p>Greater-than/equal comparison with integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.get_register_entry">
+<span class="sig-name descname"><span class="pre">get_register_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.get_register_entry" title="Permalink to this definition"></a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.2.0.</span></p>
+</div>
+<p>Use <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry.get_reg" title="regfile_generics.regfile.RegisterEntry.get_reg"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_reg()</span></code></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Value to be hold by the new RegisterEntry</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileEntry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.regfile.</span></span><span class="sig-name descname"><span class="pre">RegfileEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileEntry" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterEntry</span></code></a></p>
+<p>RegfileEntry belonging to a <a class="reference internal" href="#regfile_generics.regfile.Regfile" title="regfile_generics.regfile.Regfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">Regfile</span></code></a> which is callback on access</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.regfile.</span></span><span class="sig-name descname"><span class="pre">Regfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rfdev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile" title="Permalink to this definition"></a></dt>
+<dd><p>A Regfile handles multiple <a class="reference internal" href="#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileEntry</span></code></a> items.</p>
+<p>It can be only be initialized by using context managers (with-statement).
+if name is not given the default name will be the <code class="docutils literal notranslate"><span class="pre">&lt;CLASSNAME&gt;&#64;&lt;BASEADDR&gt;</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SubmodRegfile</span><span class="p">(</span><span class="n">Regfile</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rfdev</span><span class="p">,</span> <span class="n">base_addr</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">rfdev</span><span class="p">,</span> <span class="n">base_addr</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span> <span class="k">as</span> <span class="n">regfile</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">regfile</span><span class="p">[</span><span class="s2">&quot;reg0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">represent</span><span class="p">(</span><span class="n">addr</span><span class="o">=</span><span class="mh">0x0000</span><span class="p">,</span> <span class="n">write_mask</span><span class="o">=</span><span class="mh">0x0000001F</span><span class="p">)</span> <span class="k">as</span> <span class="n">reg</span><span class="p">:</span>
+                <span class="n">reg</span><span class="p">[</span><span class="s2">&quot;cfg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">represent</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="s2">&quot;4:0&quot;</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="s2">&quot;RW&quot;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="s2">&quot;0x0&quot;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Configure component&quot;</span><span class="p">)</span>
+                <span class="n">reg</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">represent</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="s2">&quot;31:16&quot;</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="s2">&quot;regfile&quot;</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Component status&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_addr</strong> (<em>int</em>) – </p></li>
+<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#regfile_generics.regfile.Regfile.name" title="Permalink to this definition"></a></dt>
+<dd><p>“Return the name of the registerfile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.get_base_addr">
+<span class="sig-name descname"><span class="pre">get_base_addr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.get_base_addr" title="Permalink to this definition"></a></dt>
+<dd><p>Return the base address of the register file (provided upon instantiation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__setitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Access a register entry of the Regfile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – name of the register</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>dict</em><em>, </em><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry"><em>RegisterEntry</em></a><em>]</em>) – value to execute a register write access</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">submodregfile</span><span class="p">[</span><span class="s1">&#39;reg0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cfg&#39;</span><span class="p">:</span> <span class="mb">0b1_1011</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__getitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Access a register entry of register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – name of the register</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.keys" title="Permalink to this definition"></a></dt>
+<dd><p>Get all register names of the Regfile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.KeysView[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.values" title="Permalink to this definition"></a></dt>
+<dd><p>Get all registers of the Regfile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.ValuesView[<a class="reference internal" href="#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry">RegfileEntry</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.items" title="Permalink to this definition"></a></dt>
+<dd><p>Get all names plus the corresponding registers of the Regfile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.ItemsView[str, <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__iter__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.Iterator[<a class="reference internal" href="#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry">RegfileEntry</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.reset_all">
+<span class="sig-name descname"><span class="pre">reset_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.reset_all" title="Permalink to this definition"></a></dt>
+<dd><p>Apply initial reset value to mirrored value of all registers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.get_rfdev">
+<span class="sig-name descname"><span class="pre">get_rfdev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.get_rfdev" title="Permalink to this definition"></a></dt>
+<dd><p>Get the regfile device with is used upon access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../regfile_device/index.html#regfile_generics.regfile_device.RegfileDev" title="regfile_generics.regfile_device.RegfileDev">regfile_generics.regfile_device.RegfileDev</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.set_rfdev">
+<span class="sig-name descname"><span class="pre">set_rfdev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.set_rfdev" title="Permalink to this definition"></a></dt>
+<dd><p>Set the regfile device with is used upon access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dev</strong> (<a class="reference internal" href="../regfile_device/index.html#regfile_generics.regfile_device.RegfileDev" title="regfile_generics.regfile_device.RegfileDev"><em>regfile_generics.regfile_device.RegfileDev</em></a>) – regfile device</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__setattr__">
+<span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__setattr__" title="Permalink to this definition"></a></dt>
+<dd><p>Enforce that no new attributes are set when the instance is frozen.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__getattr__">
+<span class="sig-name descname"><span class="pre">__getattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__getattr__" title="Permalink to this definition"></a></dt>
+<dd><p>Providing additional attribute-like access of a register.
+To avoid collisions the name has a <code class="docutils literal notranslate"><span class="pre">_r</span></code> suffix.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">submodregfile</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">submodregfile</span><span class="o">.</span><span class="n">config_r</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__enter__">
+<span class="sig-name descname"><span class="pre">__enter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__enter__" title="Permalink to this definition"></a></dt>
+<dd><p>Context manager of with statement - After __enter__ adding of new entries is allowed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.Regfile.__exit__">
+<span class="sig-name descname"><span class="pre">__exit__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exception_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_traceback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.Regfile.__exit__" title="Permalink to this definition"></a></dt>
+<dd><p>Context manager of with statement - Locks the instances again.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.regfile.</span></span><span class="sig-name descname"><span class="pre">RegfileMemAccess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rfdev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_addr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess" title="Permalink to this definition"></a></dt>
+<dd><p>Handling Memory through a regfile device.</p>
+<p>Note that indexing is word wise, depending on <a class="reference internal" href="../regfile_device/index.html#regfile_generics.regfile_device.RegfileDev.n_word_bytes" title="regfile_generics.regfile_device.RegfileDev.n_word_bytes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">regfile_device.RegfileDev.n_word_bytes</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rfdev</strong> (<a class="reference internal" href="../regfile_device/index.html#regfile_generics.regfile_device.RegfileDev" title="regfile_generics.regfile_device.RegfileDev"><em>regfile_generics.regfile_device.RegfileDev</em></a>) – regfile device</p></li>
+<li><p><strong>base_addr</strong> (<em>int</em>) – base address of the memory</p></li>
+</ul>
+</dd>
+</dl>
+<p>Optional kwargs:
+:key size: the size of the memory to check of index errors</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.__getitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Read a memory element via index (word addressing)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – word address to be read</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.__setitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Write a memory element via index (word addressing)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – word address to be read</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Value value<span class="colon">:</span></dt>
+<dd class="field-even"><p>value to be written to the memory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.get_rfdev">
+<span class="sig-name descname"><span class="pre">get_rfdev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.get_rfdev" title="Permalink to this definition"></a></dt>
+<dd><p>Get the regfile device with is used upon access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../regfile_device/index.html#regfile_generics.regfile_device.RegfileDev" title="regfile_generics.regfile_device.RegfileDev">regfile_generics.regfile_device.RegfileDev</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.set_rfdev">
+<span class="sig-name descname"><span class="pre">set_rfdev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.set_rfdev" title="Permalink to this definition"></a></dt>
+<dd><p>Set the regfile device with is used upon access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dev</strong> – regfile device</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.get_base_addr">
+<span class="sig-name descname"><span class="pre">get_base_addr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.get_base_addr" title="Permalink to this definition"></a></dt>
+<dd><p>Return the base address of the register file (provided upon instantiation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.read_image">
+<span class="sig-name descname"><span class="pre">read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.read_image" title="Permalink to this definition"></a></dt>
+<dd><p>Read Image starting on specified address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> (<em>int</em>) – start address</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – size of image to be read from the memory</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>memory image as list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegfileMemAccess.write_image">
+<span class="sig-name descname"><span class="pre">write_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegfileMemAccess.write_image" title="Permalink to this definition"></a></dt>
+<dd><p>Write Image starting on specified address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> (<em>int</em>) – start address</p></li>
+<li><p><strong>image</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – image to be written to the memory</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.regfile.</span></span><span class="sig-name descname"><span class="pre">RegisterField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterField" title="Permalink to this definition"></a></dt>
+<dd><p>Register Field data container</p>
+<p>This class justs holds name, msb, lsb and user defined informations as reset value or type.</p>
+<dl class="simple">
+<dt>Mandatory kwargs:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">key name<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the name of the register field.</p>
+</dd>
+<dt class="field-even">key msb<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bit position of the msb of the field within the register.</p>
+</dd>
+<dt class="field-odd">key lsb<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Bit position of the lsb of the field within the register.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Any information that should be store with the field such as the reset value, type, etc. is optional kwarg.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterField.get_field">
+<span class="sig-name descname"><span class="pre">get_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterField.get_field" title="Permalink to this definition"></a></dt>
+<dd><p>Get the value of the field from the register value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Value of the register to extract the field value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterField.get_mask">
+<span class="sig-name descname"><span class="pre">get_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterField.get_mask" title="Permalink to this definition"></a></dt>
+<dd><p>Get the mask of the field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterField.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterField.__str__" title="Permalink to this definition"></a></dt>
+<dd><p>Return the name of the field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="regfile_generics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../regfile_device/index.html" class="btn btn-neutral float-right" title="regfile_generics.regfile_device" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Felix Neumärker.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

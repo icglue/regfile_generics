@@ -1,0 +1,326 @@
+:py:mod:`regfile_generics.regfile_device`
+=========================================
+
+.. py:module:: regfile_generics.regfile_device
+
+.. autoapi-nested-parse::
+
+   Generic Devices on which a regfile can operate.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   regfile_generics.regfile_device.RegfileDev
+   regfile_generics.regfile_device.RegfileDevSimple
+   regfile_generics.regfile_device.RegfileDevSimpleDebug
+   regfile_generics.regfile_device.RegfileDevSubword
+   regfile_generics.regfile_device.RegfileDevSubwordDebug
+   regfile_generics.regfile_device.StringCmdRegfileDevSimple
+   regfile_generics.regfile_device.StringCmdRegfileDevSubword
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   regfile_generics.regfile_device.regfile_dev_debug_getbits
+
+
+
+.. py:class:: RegfileDev(callback = None, bytes_per_word = 4, logger = None, prefix = '', **kwargs)
+
+
+   Regfile Device class that handels the access of a Regfile
+
+   :param callback: dict with rfdev_read/rfdev_write/blockread/blockwrite
+                  pointing to a register read/write function
+   :param bytes_per_word: bytes per word a single register access can handle (default 4)
+   :param logger: logger instance
+   :param prefix: prefix for (debug) logging with the logger instance
+
+   .. deprecated:: 0.2.0
+
+     :key blockread: reference to a blockread function, use callback dict instead
+     :key blockwrite: reference to a blockwrite function, use callback dict instead
+
+   .. py:property:: n_word_bytes
+      :type: int
+
+      Returs the number of bytes per word the device handles on one operation.
+
+
+   .. py:method:: blockread(start_addr, size)
+
+      Initiate a blockread used for
+
+      :param start_addr: start address of read data
+      :param size: number of words to be read
+
+
+   .. py:method:: blockwrite(start_addr, values)
+
+      Initiate a blockwrite used for memory access
+      :param start_addr: start address of write data
+      :param value: word list to be written
+
+
+   .. py:method:: rfdev_read(addr)
+
+      Read method calling `rfdev_read` of callback dict passed upon init
+      - could be overridden, when deriving a new RegfileDev
+
+
+   .. py:method:: read(baseaddr, entry)
+
+      Read a register entry relative to a base address
+
+      :param baseaddr: Base address of the Register File
+      :param entry: A register entry
+
+
+   .. py:method:: rfdev_write(addr, value, mask, write_mask)
+
+      Read method could be overridden when deriving a new RegfileDev
+      default implementation is to call the function passed while initialization,
+      through the value of the "rfdev_write"-key of the callback dictionary.
+
+      :param addr: Absolute Address to be accessed for write
+      :param value: Value to be written
+      :param mask: Mask for the write operation to the register
+      :param write_mask: Mask of writeable bits inside the register
+        (e.g. to determine if read-modify-write is necessary)
+
+
+   .. py:method:: write(baseaddr, entry, value, mask)
+
+      Read a register entry relative to a base address
+
+      :param baseaddr: Base address of the Register File
+      :param entry: A register entry
+      :param value: register value
+      :param mask:  mask for the operation
+
+
+   .. py:method:: readwrite_block(start_addr, values, write)
+
+      .. deprecated:: 0.2.0
+
+      Use :func:`blockread` or :func:`blockwrite` instead.
+
+
+
+.. py:class:: RegfileDevSimple(callback = None, bytes_per_word = 4, logger = None, prefix = '', **kwargs)
+
+
+   Bases: :py:obj:`RegfileDev`
+
+   RegfileDev that operates on words only (implements read-modify-write if necessary)
+
+   Derived from :class:`.RegfileDev`
+
+   Allowed callback entries:
+
+       :key rfdev_read: read function (signature :func:`.RegfileDev.rfdev_read`)
+       :key rfdev_write_simple: write function which has the same signature like :func:`rfdev_write_simple`
+
+   .. py:method:: rfdev_write_simple(addr, value)
+
+      Simple write operation - calls back `rfdev_write_simple` if passed to constructor.
+
+      :param addr: absolute address for write operation
+      :param value: value to write
+
+
+   .. py:method:: rfdev_write(addr, value, mask, write_mask)
+
+      :class:`.RegfileDev` rfdev_write implementations
+      - executes the read-modify-write if necessary
+
+      :param addr: absolute Address to be accessed for write
+      :param value: value to be written
+      :param mask: mask for the write operation to the register
+      :param write_mask: mask of writeable bits inside the register
+
+
+
+.. py:function:: regfile_dev_debug_getbits(interactive, default_value, promptprefix)
+
+   Function to get bits for RegfileDebug* classes
+
+
+.. py:class:: RegfileDevSimpleDebug(interactive = False, **kwargs)
+
+
+   Bases: :py:obj:`RegfileDevSimple`
+
+   Debug implementation of :class:`.RegfileDevSimple`
+
+   :param interactive: if set to ``True`` the regfile device will request a user input upon read.
+
+   .. py:method:: rfdev_read(addr)
+
+      Debug read function interactive if necessary
+
+      :param: addr address
+
+
+   .. py:method:: rfdev_write_simple(addr, value)
+
+      Debug write function to `mem` attribute.
+
+      :param addr: absolute address for write operation
+      :param value: value to write
+
+
+   .. py:method:: getvalue(addr)
+
+      Get value out of the memory, randomize if necessary.
+
+      :param addr: address to be read
+
+
+
+.. py:class:: RegfileDevSubword(callback = None, bytes_per_word = 4, logger = None, prefix = '', **kwargs)
+
+
+   Bases: :py:obj:`RegfileDev`
+
+   RegfileDev that operates on word sizes (implements read-modify-write if this)
+
+   Derived from :class:`.RegfileDev`
+
+   Allowed callback entries:
+
+       :key rfdev_read: read function (signature :func:`.RegfileDev.rfdev_read`)
+       :key rfdev_write_simple: write function which has the same signature like :func:`rfdev_write_simple`
+
+   .. py:method:: rfdev_write(addr, value, mask, write_mask)
+
+      Read method could be overridden when deriving a new RegfileDev
+      default implementation is to call the function passed while initialization,
+      through the value of the "rfdev_write"-key of the callback dictionary.
+
+      :param addr: Absolute Address to be accessed for write
+      :param value: Value to be written
+      :param mask: Mask for the write operation to the register
+      :param write_mask: Mask of writeable bits inside the register
+        (e.g. to determine if read-modify-write is necessary)
+
+
+   .. py:method:: rfdev_write_subword(addr, value, size)
+
+      Word size write operation - calls back `rfdev_write_subword` if passed to constructor.
+
+      :param addr: absolute address for write operation (lower address bit indicate word position)
+      :param value: value to write
+      :param size: number of bytes to write
+
+
+
+.. py:class:: RegfileDevSubwordDebug(interactive = False, **kwargs)
+
+
+   Bases: :py:obj:`RegfileDevSubword`
+
+   Debug implementation of :class:`.RegfileDevSimple`
+
+   :param interactive: if set to ``True`` the regfile device will request a user input upon read.
+
+   .. py:method:: getvalue(addr)
+
+      Return memory value
+
+      :param addr: address were the data will be read
+
+
+   .. py:method:: rfdev_read(addr)
+
+      Debug read function interactive if necessary
+
+      :param: addr address
+
+
+   .. py:method:: rfdev_write_subword(addr, value, size)
+
+      Word size write operation - calls back `rfdev_write_subword` if passed to constructor.
+
+      :param addr: absolute address for write operation (lower address bit indicate word position)
+      :param value: value to write
+      :param size: number of bytes to write
+
+
+
+.. py:class:: StringCmdRegfileDevSimple(execute = None, **kwargs)
+
+
+   Bases: :py:obj:`RegfileDevSimple`
+
+   Forwards regfile operations to a function call with string command,
+   to do the regfile operations.
+
+    Read:
+        r<NUMBITS> <address>
+            e.g. r32 0x1C
+
+    Write:
+        w<NUMBITS> <address> <value>
+            e.g. w32 0x80 0xF9852A
+
+   .. py:method:: rfdev_read(addr)
+
+      Debug read function implementation translates to :func:`execute()`
+
+      :param addr: absolute address for read operation
+
+
+   .. py:method:: rfdev_write_simple(addr, value)
+
+      Debug write function implementation translates to :func:`execute()`
+
+      :param addr: absolute address for write operation
+      :param value: value to write
+
+
+
+.. py:class:: StringCmdRegfileDevSubword(**kwargs)
+
+
+   Bases: :py:obj:`RegfileDevSubword`
+
+   Forwards regfile operations to a function call with string command,
+   to do the regfile operations.
+
+    Read:
+        r<NUMBITS> <address>
+            e.g. r32 0x1C
+
+    Write:
+        w<NUMBITS> <address> <value> [bsel]
+            e.g. w32 0x80 0xF9852A
+                 w32 0x80 0xF9852A 0x1
+
+   .. py:method:: rfdev_read(addr)
+
+      Read method calling `rfdev_read` of callback dict passed upon init
+      - could be overridden, when deriving a new RegfileDev
+
+
+   .. py:method:: rfdev_write_subword(addr, value, size)
+
+      Word size write operation - calls back `rfdev_write_subword` if passed to constructor.
+
+      :param addr: absolute address for write operation (lower address bit indicate word position)
+      :param value: value to write
+      :param size: number of bytes to write
+
+
+
