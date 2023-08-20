@@ -470,7 +470,7 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
                 writable_fields.append((name, field))
         return writable_fields
 
-    def get_register_entry(self, value: int) -> RegisterEntry:
+    def get_register_entry(self, value: int) -> RegisterEntry:  # pragma: nocover
         """.. deprecated:: 0.2.0
 
         Use :func:`get_reg` instead.
@@ -722,7 +722,7 @@ class RegfileMemAccess:
 
         from .regfile_device import RegfileDev  # pylint: disable=import-outside-toplevel
 
-        if type(self._dev).readwrite_block is not RegfileDev.readwrite_block:
+        if type(self._dev).readwrite_block is not RegfileDev.readwrite_block:  # pragma: nocover
             warnings.warn(
                 f"Overriding function readwrite_block in {type(self._dev)} is deprecated"
                 " and will not be support in future versions.",
@@ -742,7 +742,7 @@ class RegfileMemAccess:
         # TODO: remove (deprecated)
         from .regfile_device import RegfileDev  # pylint: disable=import-outside-toplevel
 
-        if type(self._dev).readwrite_block is not RegfileDev.readwrite_block:
+        if type(self._dev).readwrite_block is not RegfileDev.readwrite_block:  # pragma: nocover
             warnings.warn(
                 f"Overriding function readwrite_block in {type(self._dev)} is deprecated"
                 " and will not be support in future versions.",

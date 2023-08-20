@@ -34,7 +34,7 @@ import traceback
 import warnings
 from typing import TYPE_CHECKING, cast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: nocover
     from typing import Callable, Optional
 
     from .regfile import RegfileEntry
@@ -69,7 +69,7 @@ class RegfileDev:
         self.callback = callback if callback else {}
 
         for blockop in ("blockread", "blockwrite"):
-            if blockop in kwargs:
+            if blockop in kwargs:  # pragma: nocover
                 warnings.warn(
                     f"RegfileDev init - kwarg {blockop} has been deprecated use the callback dict instead.",
                     UserWarning,
@@ -176,7 +176,7 @@ class RegfileDev:
         )
         self.rfdev_write(addr, value, mask, entry.write_mask)
 
-    def readwrite_block(self, start_addr, values, write):
+    def readwrite_block(self, start_addr, values, write):  # pragma: nocover
         """.. deprecated:: 0.2.0
 
         Use :func:`blockread` or :func:`blockwrite` instead."""
@@ -242,29 +242,29 @@ class RegfileDevSimple(RegfileDev):
 
 def regfile_dev_debug_getbits(interactive: bool, default_value: int, promptprefix: str) -> int:
     """Function to get bits for RegfileDebug* classes"""
+    value = default_value
     if not interactive:
         print(f"{promptprefix} value: 0x{default_value:x}")
-        return default_value
+    else:  # pragma: nocover
+        lasttrace: Optional[traceback.FrameSummary] = None
+        regfile_generics_package_path = os.path.dirname(__file__)
 
-    # pragma nocover
-    lasttrace: Optional[traceback.FrameSummary] = None
-    regfile_generics_package_path = os.path.dirname(__file__)
+        for stacktrace in traceback.extract_stack():
+            if stacktrace[0].startswith(regfile_generics_package_path):
+                if lasttrace is not None:
+                    print(f"{lasttrace[0]}:{lasttrace[1]}: {lasttrace[3]}", file=sys.stderr)
+                break
+            lasttrace = stacktrace
 
-    for stacktrace in traceback.extract_stack():
-        if stacktrace[0].startswith(regfile_generics_package_path):
-            if lasttrace is not None:
-                print(f"{lasttrace[0]}:{lasttrace[1]}: {lasttrace[3]}", file=sys.stderr)
-            break
-        lasttrace = stacktrace
+        while True:
+            if input_value := input(f"{promptprefix} value (0x{default_value:x}): "):
+                try:
+                    value = int(input_value, 0)
+                    break
+                except ValueError:
+                    print(f"Invalid value {value}.")
 
-    while True:
-        value = input(f"{promptprefix} value(0x{default_value:x}): ")
-        if not value:
-            return default_value
-        try:
-            return int(value, 0)
-        except ValueError:
-            print(f"Invalid value {value}.")
+    return value
 
 
 class RegfileDevSimpleDebug(RegfileDevSimple):
