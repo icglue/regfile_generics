@@ -18,10 +18,14 @@ def test_readme_example(sessionsimpleregfile: FixtureSimpleRegfile):
 
     # read (can be int or dict or string context)
     print(regfile["reg1_high"])
+    assert (
+        str(regfile["reg1_high"])
+        == "Register reg1_high: {'cfg': 0xa, 'cfg_trigger': 0x0, 'cfg_trigger_mode': 0x1} = 0x1000a"
+    )
     assert regfile["reg1_high"] == 0x1000A
-    print(regfile["reg1_high"])
+    assert dict(regfile["reg1_high"]) == {"cfg": 10, "cfg_trigger": 0, "cfg_trigger_mode": 1}
 
-    # read entire entry to a variable, so that no further read request will be issued
+    # read entire entry to a variable, so that no further read/write request will be issued
     rh1 = regfile["reg1_high"].read_entry()
     print(f"cfg: {rh1['cfg']}")
     print(f"trigger: {rh1['cfg_trigger']}")
