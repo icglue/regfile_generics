@@ -53,15 +53,16 @@ Implement read/write functions and pass them (or overwrite while deriving) to an
     regfile.reg1_high_r.update()
 
     # write_update
-    regfile["reg1_high_r"].write_update(cfg=0xA, cfg_trigger_mode=1)
+    regfile["reg1_high"].write_update(cfg=0xA, cfg_trigger_mode=1)
 
     # read (can be int or dict or string context)
-    assert regfile["reg1_high"] == 0x22
+    print(regfile["reg1_high"])
+    assert regfile["reg1_high"] == 0x1000A
     print(regfile["reg1_high"])
 
     # read entire entry to a variable, so that no further read request will be issued
     rh1 = regfile["reg1_high"].read_entry()
-    print(f"cfg: {rh1['cfg']"}
-    print(f"trigger: {rh1['cfg_trigger']"}
-    print(f"mode: {rh1['cfg_trigger_mode']"}
+    print(f"cfg: {rh1['cfg']}")
+    print(f"trigger: {rh1['cfg_trigger']}")
+    print(f"mode: {rh1['cfg_trigger_mode']}")
 ```
