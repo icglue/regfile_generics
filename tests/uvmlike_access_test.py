@@ -1,9 +1,11 @@
 from pytest import warns
 
+from .fixtures import FixtureMemAccess, FixtureSimpleRegfile, FixtureSubwordRegfile
+
 # pylint: disable=line-too-long,missing-function-docstring
 
 
-def test_uvm_write(sessionsubwordregfile):
+def test_uvm_write(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     regfile, rfdev = sessionsubwordregfile
     regfile.reset_all()
     write_count = rfdev.write_count

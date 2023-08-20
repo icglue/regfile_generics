@@ -2,12 +2,12 @@
 
 from pytest import warns
 
-from .fixtures import FixtureSimpleRegfile
+from .fixtures import FixtureMemAccess, FixtureSimpleRegfile, FixtureSubwordRegfile
 
 # pylint: disable=line-too-long,missing-function-docstring
 
 
-def test_dict_access(sessionsubwordregfile):
+def test_dict_access(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     """dict like access"""
     regfile, rfdev = sessionsubwordregfile
 
@@ -30,7 +30,7 @@ def test_dict_access(sessionsubwordregfile):
     assert write_count + 2 == rfdev.write_count
 
 
-def test_str_cast(sessionsubwordregfile):
+def test_str_cast(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     regfile, rfdev = sessionsubwordregfile
 
     write_count = rfdev.write_count
@@ -50,7 +50,7 @@ def test_str_cast(sessionsubwordregfile):
     assert str(regfile["reg1_high"].field("cfg")) == "cfg"
 
 
-def test_truncation_warning(sessionsubwordregfile):
+def test_truncation_warning(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     regfile, rfdev = sessionsubwordregfile
 
     with warns(
@@ -72,7 +72,7 @@ def test_truncation_warning(sessionsubwordregfile):
         regfile["reg0"]["status"] = 0x100
 
 
-def test_read_entry(sessionsubwordregfile):
+def test_read_entry(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     regfile, rfdev = sessionsubwordregfile
     write_count = rfdev.write_count
     read_count = rfdev.read_count
@@ -99,7 +99,7 @@ def test_read_entry(sessionsubwordregfile):
     assert read_count + 2 == rfdev.read_count
 
 
-def test_int_access(sessionsubwordregfile):
+def test_int_access(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     regfile, rfdev = sessionsubwordregfile
 
     read_count = rfdev.read_count
@@ -119,7 +119,7 @@ def test_int_access(sessionsubwordregfile):
     assert read_count + 8 == rfdev.read_count
 
 
-def test_get_reset_values(sessionsubwordregfile):
+def test_get_reset_values(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     regfile, rfdev = sessionsubwordregfile
     assert dict(regfile["reg_addr40"].get_reset_values()) == {
         "start": 0,
@@ -127,7 +127,7 @@ def test_get_reset_values(sessionsubwordregfile):
     }
 
 
-def test_rfdev_simple(sessionsimpleregfile: FixtureSimpleRegfile):
+def test_rfdev_simple(sessionsimpleregfile: FixtureSimpleRegfile) -> None:
     regfile, rfdev = sessionsimpleregfile
 
     regfile["reg1_high"] = {"cfg": 0x07A, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0}
@@ -153,7 +153,7 @@ def test_rfdev_simple(sessionsimpleregfile: FixtureSimpleRegfile):
     assert write_count + 3 == rfdev.write_count
 
 
-def test_mem(sessionmemregfile):
+def test_mem(sessionmemregfile: FixtureMemAccess) -> None:
     regfile, rfdev = sessionmemregfile
 
     regfile.write_image(0x8, tuple(i for i in range(16)))
