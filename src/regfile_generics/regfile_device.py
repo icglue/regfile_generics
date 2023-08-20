@@ -35,8 +35,9 @@ import warnings
 from typing import TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
-    from .regfile import RegfileEntry
     from typing import Callable, Optional
+
+    from .regfile import RegfileEntry
 
 
 class RegfileDev:
@@ -105,7 +106,7 @@ class RegfileDev:
 
         return [self.rfdev_read(start_addr + i * self.n_word_bytes) for i in range(size)]
 
-    def blockwrite(self, start_addr: int, values: list[int]) -> None:
+    def blockwrite(self, start_addr: int, values: tuple[int, ...]) -> None:
         """Initiate a blockwrite used for memory access
         :param start_addr: start address of write data
         :param value: word list to be written"""

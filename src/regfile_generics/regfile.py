@@ -28,11 +28,10 @@ from __future__ import annotations
 
 import traceback
 import warnings
-
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:  # pragma: no cover
-    from collections.abc import Iterator, ItemsView, KeysView, ValuesView
+    from collections.abc import ItemsView, Iterator, KeysView, ValuesView
     from typing import Callable, Optional, Union
 
     from .regfile_device import RegfileDev
@@ -210,13 +209,14 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
     def field(self, name: str) -> RegisterField:
         """Get the field by name and add callback for UVM-like set() method of fields"""
         field = self._fields[name]
-        if not hasattr(field, "set"):
+        if not hasattr(field, "_has_setfunc"):
 
             def setfunc(value: int) -> None:
                 self.desired_value &= ~field.get_mask()
                 self.desired_value |= self._fit_fieldvalue_for_write(field, value) << field.lsb
 
             setattr(field, "set", setfunc)
+            setattr(field, "_has_setfunc", True)
 
         return field
 
@@ -734,7 +734,7 @@ class RegfileMemAccess:
 
         return self._dev.blockread(self.__base_addr + addr, size)
 
-    def write_image(self, addr: int, image: list[int]) -> None:
+    def write_image(self, addr: int, image: tuple[int, ...]) -> None:
         """Write Image starting on specified address.
 
         :param addr: start address
@@ -789,6 +789,11 @@ class RegisterField:
     def __str__(self) -> str:
         """Return the name of the field"""
         return f"{self.name}"
+
+    def set(self, value: int) -> None:
+        """UVM set function
+
+        :param value: set desired value"""
 
 
 class _RepresentDict:
