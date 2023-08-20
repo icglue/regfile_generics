@@ -505,4 +505,11 @@ Classes
       Return the name of the field
 
 
+   .. py:method:: set(value)
+
+      UVM set function
+
+      :param value: set desired value
+
+
 
