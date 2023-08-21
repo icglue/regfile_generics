@@ -15,9 +15,6 @@ jobs:
         python-version: '3.11'
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
-    - name: CNAME
-      run:
-        echo -n "regfile-generics.icglue.org" > docs/_build/html/CNAME
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
