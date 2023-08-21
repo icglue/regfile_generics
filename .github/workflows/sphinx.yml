@@ -15,14 +15,14 @@ jobs:
         python-version: '3.11'
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
+    - name: CNAME
+      run:
+        echo -n "regfile-generics.icglue.org" > docs/_build/html/CNAME
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: html-docs
         path: docs/_build/html
-    - name: CNAME
-      run:
-        echo -n "regfile-generics.icglue.org" > docs/_build/html/CNAME
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/master'
