@@ -6,3 +6,4 @@ v0.2.0
 - RegfileDev: deprecated readwrite_block
 - Regfile: make `read/write` function private
 - RegisterEntry: make `writable_field_items` function private
+- add boolean conversion
