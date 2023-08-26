@@ -404,8 +404,12 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         return self.regfile.get_base_addr() + self.addr
 
     def __int__(self) -> int:
-        """Integer conversion - executes a read"""
+        """Integer conversion of register value"""
         return self.get_value()
+
+    def __bool__(self) -> bool:
+        """Boolean conversion of register value"""
+        return bool(self.get_value())
 
     def __eq__(self, other):
         """Equal comparison with integer"""
