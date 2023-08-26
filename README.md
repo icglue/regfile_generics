@@ -22,7 +22,7 @@
 ### From PyPI
 
 ```bash
-python3 -m pip install --upgrade regfile_generics
+python3 -m pip install --upgrade regfile-generics
 ```
 
 ### From source
