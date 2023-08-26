@@ -438,7 +438,12 @@ Classes
 
    .. py:method:: __int__()
 
-      Integer conversion - executes a read
+      Integer conversion of register value
+
+
+   .. py:method:: __bool__()
+
+      Boolean conversion of register value
 
 
    .. py:method:: __eq__(other)
