@@ -9,12 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Get tags
+      run: git fetch --tags origin
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    - name: Build HTML
-      uses: ammaraskar/sphinx-action@master
+    - name: Build html
+      run: |
+        pip install --upgrade -r docs/requirements.txt
+        sphinx-multiversion docs docs/_build/html
+        touch docs/_build/html/.nojekyll
+        echo -n 'regfile-generics.icglue.org' > docs/_build/html/CNAME
+        cp docs/assets/gh-pages-redirect.html docs/_build/html/index.html
+      shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
