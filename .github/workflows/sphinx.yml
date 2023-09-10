@@ -25,11 +25,6 @@ jobs:
         echo -n 'regfile-generics.icglue.org' > docs/_build/html/CNAME
         cp docs/assets/gh-pages-redirect.html docs/_build/html/index.html
       shell: bash
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: html-docs
-        path: docs/_build/html
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/master'
