@@ -14,7 +14,7 @@ def test_dict_access(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     write_count = rfdev.write_count
     regfile["reg1_high"] = {"cfg": 0x0FF, "cfg_trigger": 0x1, "cfg_trigger_mode": 0x0}
 
-    assert 0xF000_0008 in rfdev.mem.keys()
+    assert 0xF000_0008 in rfdev.mem
     assert rfdev.getvalue(0xF000_0008) == 0x1FF
 
     regfile["reg0"] = {"cfg": 0x11}
