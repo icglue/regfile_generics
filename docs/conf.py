@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "regfile_generics"
-copyright = "2023, Felix Neumärker"
+copyright = "2023, ICGlue.org"
 author = "Felix Neumärker"
 
 # -- General configuration ---------------------------------------------------
@@ -16,7 +16,6 @@ author = "Felix Neumärker"
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.duration",
-    "sphinx.ext.githubpages",
     "autoapi.extension",
     "sphinx_multiversion",
 ]
@@ -68,7 +67,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_baseurl = "https://regfile-generics.icglue.org"
+# html_baseurl = "https://regfile-generics.icglue.org"
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 html_show_sourcelink = False
