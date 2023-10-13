@@ -32,10 +32,10 @@ import struct
 import sys
 import traceback
 import warnings
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Callable, cast
 
 if TYPE_CHECKING:  # pragma: nocover
-    from typing import Callable, Optional
+    from typing import Optional
 
     from .regfile import RegfileEntry
 
