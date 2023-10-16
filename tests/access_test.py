@@ -37,7 +37,7 @@ def test_str_cast(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     read_count = rfdev.read_count
     regfile["reg1_high"] = {"cfg": 0x0AA, "cfg_trigger": 0x0, "cfg_trigger_mode": 0x0}
 
-    print("Byte aligned - should no do read-modify-write...")
+    print("Byte aligned - should not do read-modify-write...")
     regfile["reg1_high"]["cfg_trigger_mode"] = 0b11
 
     print("Reading register to string...")

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import logging
 import sys
 import typing
 from typing import cast
@@ -57,7 +58,7 @@ FixtureSubwordRegfile = typing.Annotated[tuple[Regfile, RegfileDevSubwordDebug],
 
 @pytest.fixture(scope="session")
 def sessionsubwordregfile() -> FixtureSubwordRegfile:
-    regfile = SubmodRegfile(RegfileDevSubwordDebug(), 0xF000_0000)
+    regfile = SubmodRegfile(RegfileDevSubwordDebug(logger=logging.getLogger()), 0xF000_0000)
     return cast(FixtureSubwordRegfile, (regfile, regfile.get_rfdev()))
 
 
@@ -66,7 +67,7 @@ FixtureSimpleRegfile = typing.Annotated[tuple[Regfile, RegfileDevSimpleDebug], p
 
 @pytest.fixture(scope="session")
 def sessionsimpleregfile() -> FixtureSimpleRegfile:
-    regfile = SubmodRegfile(RegfileDevSimpleDebug(), 0xF000_0000)
+    regfile = SubmodRegfile(RegfileDevSimpleDebug(logger=logging.getLogger()), 0xF000_0000)
     return cast(FixtureSimpleRegfile, (regfile, regfile.get_rfdev()))
 
 
@@ -75,5 +76,5 @@ FixtureMemAccess = typing.Annotated[tuple[RegfileMemAccess, RegfileDevSimpleDebu
 
 @pytest.fixture(scope="session")
 def sessionmemregfile() -> FixtureMemAccess:
-    regfile = RegfileMemAccess(RegfileDevSubwordDebug(), 0xA000_0000, size=1024)
+    regfile = RegfileMemAccess(RegfileDevSubwordDebug(logger=logging.getLogger()), 0xA000_0000, size=1024)
     return cast(FixtureMemAccess, (regfile, regfile.get_rfdev()))
