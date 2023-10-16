@@ -251,7 +251,18 @@ otherwise the value is decomposed to the fields</p>
 <dd><p>Return a copied list containing all writable fieldnames</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[str]</p>
+<dd class="field-odd"><p>tuple[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="regfile_generics.regfile.RegisterEntry.writable_field_items">
+<span class="sig-name descname"><span class="pre">writable_field_items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.regfile.RegisterEntry.writable_field_items" title="Link to this definition"></a></dt>
+<dd><p>Return a iterator over all writable_fields (tuple name, RegisterEntry)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>collections.abc.Iterator[tuple[str, <a class="reference internal" href="#regfile_generics.regfile.RegisterEntry" title="regfile_generics.regfile.RegisterEntry">RegisterEntry</a>]]</p>
 </dd>
 </dl>
 </dd></dl>

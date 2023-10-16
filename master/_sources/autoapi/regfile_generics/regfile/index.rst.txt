@@ -105,6 +105,11 @@ Classes
       Return a copied list containing all writable fieldnames
 
 
+   .. py:method:: writable_field_items()
+
+      Return a iterator over all writable_fields (tuple name, RegisterEntry)
+
+
    .. py:method:: get_reset_values()
 
       Get iterator object of the tuple (fieldname, resetvalue) for writable fields only.
