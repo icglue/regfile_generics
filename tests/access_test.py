@@ -127,6 +127,23 @@ def test_get_reset_values(sessionsubwordregfile: FixtureSubwordRegfile) -> None:
     }
 
 
+def test_writable_fields(sessionsubwordregfile: FixtureSubwordRegfile):
+    regfile, rfdev = sessionsubwordregfile
+    assert dict(regfile["reg2"].writable_field_items()) == {"config": regfile["reg2"].field("config")}
+
+    reg_addr40_fields = list(regfile["reg_addr40"].get_writable_fieldnames())
+
+    mask = 0
+    for name, field in regfile["reg_addr40"].writable_field_items():
+        mask |= field.get_mask()
+        reg_addr40_fields.remove(name)
+
+    assert mask == regfile["reg_addr40"].write_mask
+
+    # all fields are writeable
+    assert not reg_addr40_fields
+
+
 def test_rfdev_simple(sessionsimpleregfile: FixtureSimpleRegfile) -> None:
     regfile, rfdev = sessionsimpleregfile
 
