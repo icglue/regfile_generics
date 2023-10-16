@@ -104,7 +104,7 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         for attr, value in kwargs.items():
             setattr(self, attr, value)
 
-        self._writable_fieldnames = tuple(name for name, _ in self._set_writable_field_items())
+        self._set_writeable_fieldnames()
         self._frozen = True
         return self
 
@@ -198,13 +198,18 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         """Returns a copy of the field's dictionary's list of keys (fieldnames)."""
         return self._fields.keys()
 
-    def get_writable_fieldnames(self) -> list[str]:
+    def get_writable_fieldnames(self) -> tuple[str]:
         """Return a copied list containing all writable fieldnames"""
-        return list(self._writable_fieldnames)
+        return self._writable_fieldnames
+
+    def writable_field_items(self) -> Iterator[tuple[str, RegisterEntry]]:
+        """Return a iterator over all writable_fields (tuple name, RegisterEntry)"""
+        for name in self._writable_fieldnames:
+            yield name, self._fields[name]
 
     def get_reset_values(self) -> dict[str, int]:
         """Get iterator object of the tuple (fieldname, resetvalue) for writable fields only."""
-        return {fieldname: field.get_field(self._reset) for fieldname, field in self._set_writable_field_items()}
+        return {name: self._fields[name].get_field(self._reset) for name in self._writable_fieldnames}
 
     def field(self, name: str) -> RegisterField:
         """Get the field by name and add callback for UVM-like set() method of fields"""
@@ -273,7 +278,7 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         if isinstance(value, int):
             self._set_value(value, mask)
         elif isinstance(value, dict):
-            writable_fieldnames = self.get_writable_fieldnames()
+            writable_fieldnames = list(self.get_writable_fieldnames())
             write_value = 0
             for fieldname, fieldvalue in value.items():
                 if fieldname in writable_fieldnames:
@@ -327,7 +332,7 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         """Lock the register fields - sort-out the writable_fieldnames
         with the help of the write_mask"""
         # TODO: sanity check write mask
-        self._writable_fieldnames = tuple(name for name, _ in self._set_writable_field_items())
+        self._set_writeable_fieldnames()
 
     def __getattr__(self, name: str):
         """Allow member access of fields - must have '_f' as suffix (<FIELDNAME>_f)."""
@@ -465,14 +470,11 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
 
         return self._fit_fieldvalue(field, value)
 
-    def _set_writable_field_items(self) -> list[tuple[str, RegisterField]]:
+    def _set_writeable_fieldnames(self) -> None:
         """Tuple of object over all writable fieldnames"""
-        writable_fields = []
-        for name, field in self._fields.items():
-            field_mask = field.get_mask()
-            if field_mask & self.write_mask == field_mask:
-                writable_fields.append((name, field))
-        return writable_fields
+        self._writable_fieldnames = tuple(
+            name for name, field in self._fields.items() if field.get_mask() & self.write_mask == field.get_mask()
+        )
 
     def get_register_entry(self, value: int) -> RegisterEntry:  # pragma: nocover
         """.. deprecated:: 0.2.0
