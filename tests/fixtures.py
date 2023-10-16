@@ -19,7 +19,7 @@ class SubmodRegfile(Regfile):
         with self as regfile:
             with regfile["reg0"].represent(addr=0x0000, write_mask=0x0000001F) as reg:
                 reg["cfg"].represent(bits="4:0", access="RW", reset="0x0", desc="Configure component")
-                reg["status"].represent(bits="31:16", access="regfile", desc="Component status")
+                reg["status"].represent(bits="31:16", access="R", desc="Component status")
 
             with regfile["reg1_low"].represent(addr=0x0004, write_mask=0xFFFFFFFF) as reg:
                 reg["cfg"].represent(bits="31:0", access="RW", reset="0x0", desc="Configure submod part 0")
@@ -36,7 +36,7 @@ class SubmodRegfile(Regfile):
 
             with regfile["reg2"].represent(addr=0x00C0, write_mask=0x000001F0) as reg:
                 reg["config"].represent(bits="8:4", access="RW", reset="0x0", desc="Configure component")
-                reg["status"].represent(bits="31:16", access="regfile", desc="Component status")
+                reg["status"].represent(bits="31:16", access="R", desc="Component status")
 
             with regfile["reg_addr40"].represent(addr=0x0040, write_mask=0x0000001F) as reg:
                 reg["start"].represent(bits="0", access="RW", reset="0b0", desc="start's the module")
