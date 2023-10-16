@@ -34,4 +34,4 @@ def test_readme_example(sessionsimpleregfile: FixtureSimpleRegfile):
     # bool access
     regfile["reg1_high"] = 0
     if regfile["reg1_high"]:
-        assert False
+        assert False  # pragma: nocover
