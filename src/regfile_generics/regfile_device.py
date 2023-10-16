@@ -64,7 +64,7 @@ class RegfileDev:
     ):
         super().__init__()
         self._bytes_per_word = bytes_per_word
-        self.logger = logger if logger else logging.getLogger(__name__)
+        self.logger = logger
         self._prefix = prefix
         self.callback = callback if callback else {}
 
@@ -123,7 +123,14 @@ class RegfileDev:
     def rfdev_read(self, addr: int) -> int:
         """Read method calling `rfdev_read` of callback dict passed upon init
         - could be overridden, when deriving a new RegfileDev"""
-        return self.callback["rfdev_read"](addr)
+        value = self.callback["rfdev_read"](addr)
+        if self.logger:
+            self.logger.debug(
+                "RegfileDevice: Read address 0x%x -- value: 0x%x",
+                addr,
+                value,
+            )
+        return value
 
     def read(self, baseaddr: int, entry: RegfileEntry) -> int:
         """Read a register entry relative to a base address
@@ -132,13 +139,13 @@ class RegfileDev:
         :param entry: A register entry
         """
         value = self.rfdev_read(baseaddr + entry.addr)
-        self.logger.debug(
-            "%sRegfileDevice reading entry %s from address 0x%x = 0x%x",
-            self._prefix,
-            entry.name,
-            entry.addr,
-            value,
-        )
+        if self.logger and self.logger.isEnabledFor(logging.INFO):
+            self.logger.info(
+                "%sReading %s: %s",
+                self._prefix,
+                entry.regfile.name,
+                entry.get_reg(value),
+            )
         return value
 
     def rfdev_write(self, addr: int, value: int, mask: int, write_mask: int) -> None:
@@ -152,6 +159,15 @@ class RegfileDev:
         :param write_mask: Mask of writeable bits inside the register
           (e.g. to determine if read-modify-write is necessary)
         """
+
+        if self.logger:
+            self.logger.debug(
+                "RegfileDevice: Read address 0x%x -- value: 0x%x (mask: 0x%x, write_mask: 0x%x)",
+                addr,
+                value,
+                mask,
+                write_mask,
+            )
         self.callback["rfdev_write"](addr, value, mask, write_mask)
 
     def write(self, baseaddr: int, entry: RegfileEntry, value: int, mask: int) -> None:
@@ -164,16 +180,19 @@ class RegfileDev:
         """
         addr = baseaddr + entry.addr
 
-        self.logger.debug(
-            "%sRegfileDevice initiate write of entry %s at address "
-            "0x%x -- {value: 0x%x, mask 0x%x, write_mask: 0x%x}",
-            self._prefix,
-            entry.name,
-            entry.addr,
-            value,
-            mask,
-            entry.write_mask,
-        )
+        if self.logger and self.logger.isEnabledFor(logging.INFO):
+            update_fields = [
+                f"'{name}': 0x{field.get_field(value):x}" for name, field in entry.items() if field.get_mask() & mask
+            ]
+            self.logger.info(
+                "%sWriting %s: Register %s = 0x%x & 0x%x --> {%s}",
+                self._prefix,
+                entry.regfile.name,
+                entry.name,
+                value,
+                mask,
+                ", ".join(update_fields),
+            )
         self.rfdev_write(addr, value, mask, entry.write_mask)
 
     def readwrite_block(self, start_addr, values, write):  # pragma: nocover
@@ -215,6 +234,13 @@ class RegfileDevSimple(RegfileDev):
         :param addr: absolute address for write operation
         :param value: value to write
         """
+
+        if self.logger:
+            self.logger.debug(
+                "RegfileDevice: Read address 0x%x -- value: 0x%x",
+                addr,
+                value,
+            )
         self.callback["rfdev_write_simple"](addr, value)
 
     def rfdev_write(self, addr: int, value: int, mask: int, write_mask: int) -> None:
@@ -294,6 +320,13 @@ class RegfileDevSimpleDebug(RegfileDevSimple):
         self.mem[addr] = value
 
         self.read_count += 1
+
+        if self.logger:
+            self.logger.debug(
+                "RegfileDevice: Read address 0x%x -- value: 0x%x",
+                addr,
+                value,
+            )
         return value
 
     def rfdev_write_simple(self, addr: int, value: int) -> None:
@@ -312,7 +345,8 @@ class RegfileDevSimpleDebug(RegfileDevSimple):
         :param addr: address to be read"""
         if addr not in self.mem:
             value = random.getrandbits(8 * self.n_word_bytes)
-            self.logger.info("Generating random regfile value 0x%x", value)
+            if self.logger:
+                self.logger.info("Generating random regfile value 0x%x", value)
             return value
 
         return self.mem[addr]
@@ -349,12 +383,13 @@ class RegfileDevSubword(RegfileDev):
                     subword_offset = i * n_subword_bytes
 
                     # call virtual method
-                    self.logger.debug(
-                        "RegfileDevice: Subwrite address 0x%x -- {value: 0x%x, n_subword_bytes: 0x%x}",
-                        addr + subword_offset,
-                        value,
-                        n_subword_bytes,
-                    )
+                    if self.logger:
+                        self.logger.debug(
+                            "RegfileDevice: Subwrite address 0x%x -- {value: 0x%x, n_subword_bytes: 0x%x}",
+                            addr + subword_offset,
+                            value,
+                            n_subword_bytes,
+                        )
                     self.rfdev_write_subword(addr + subword_offset, value, n_subword_bytes)
                     # we are done here ...
                     return
@@ -434,6 +469,13 @@ class RegfileDevSubwordDebug(RegfileDevSubword):
             self.mem[addr + i] = (value >> (8 * i)) & 0xFF
 
         self.read_count += 1
+
+        if self.logger:
+            self.logger.debug(
+                "RegfileDevice: Read address 0x%x -- value: 0x%x",
+                addr,
+                value,
+            )
         return value
 
     def rfdev_write_subword(self, addr: int, value: int, size: int) -> None:
