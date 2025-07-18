@@ -456,7 +456,9 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         truncval = value & fieldmask
 
         if value != truncval:
-            _regfile_warn_user(f"{field.name}: value 0x{value:x} is truncated to 0x{truncval:x} (mask: 0x{fieldmask}).")
+            _regfile_warn_user(
+                f"{field.name}: value 0x{value:x} is truncated to 0x{truncval:x} (mask: 0x{fieldmask:x})."
+            )
         return truncval
 
     def _fit_fieldvalue_for_write(self, field: RegisterField, value: int) -> int:

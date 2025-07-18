@@ -81,7 +81,7 @@ class RegfileDev:
             raise TypeError("Argument 'callback' has to dict with name, callback function.")
 
         if not set(self.callback) <= self._allowed_callbacks():
-            raise AttributeError(f"Only {self._allowed_callbacks} are allowed as callback functions.")
+            raise AttributeError(f"Only {self._allowed_callbacks()} are allowed as callback functions.")
 
         for func in self._allowed_callbacks() - set(self.callback):
             if not hasattr(self, func):
