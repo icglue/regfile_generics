@@ -1,5 +1,5 @@
-:py:mod:`regfile_generics.regfile`
-==================================
+regfile_generics.regfile
+========================
 
 .. py:module:: regfile_generics.regfile
 
@@ -9,11 +9,8 @@
 
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
@@ -24,18 +21,50 @@ Classes
    regfile_generics.regfile.RegisterField
 
 
-
+Module Contents
+---------------
 
 .. py:class:: RegisterEntry(**kwargs)
-
 
    Decompose access of a register into fields.
 
    If ``kwargs`` are specified, they are passed to the :func:`represent` function.
 
+
+   .. py:attribute:: addr
+      :value: 0
+
+
+
+   .. py:attribute:: write_mask
+      :value: -1
+
+
+
+   .. py:attribute:: regfile
+      :value: None
+
+
+
+   .. py:attribute:: name
+      :value: 'UNNAMED'
+
+
+
+   .. py:attribute:: mirrored_value
+      :value: 0
+
+
+
+   .. py:attribute:: desired_value
+      :value: 0
+
+
+
    .. py:method:: represent(addr = None, write_mask = None, fields = None, regfile = None, name = None, reset = None, mirrored_value = None, **kwargs)
 
       Used upon initialization.
+
 
 
    .. py:method:: __getitem__(key)
@@ -45,12 +74,14 @@ Classes
       :param key: Name of the register-field.
 
 
+
    .. py:method:: __setitem__(key, value)
 
       Dict-like access to write a value to a field.
 
       :param key: name of the register field
       :param value: value to be written to the field
+
 
 
    .. py:method:: write_update(*args, **kwargs)
@@ -67,6 +98,7 @@ Classes
          submodregfile["reg0"].write_update(cfg=0b0_0100)
 
 
+
    .. py:method:: get_reg(value = None)
 
       Return a new RegisterEntry (shallow copy).
@@ -75,9 +107,11 @@ Classes
                     if value is not the value will be taken from the original instance
 
 
+
    .. py:method:: read_entry()
 
       Reads the value and returns a new RegisterEntry (alias of :func:`get_reg()`).
+
 
 
    .. py:method:: get_dict(value = None)
@@ -90,9 +124,11 @@ Classes
       :param value: Integer value that should be decomposed
 
 
+
    .. py:method:: get_name()
 
       Get the name of the register, if set otherwise return UNNAMED
+
 
 
    .. py:method:: get_field_names()
@@ -100,9 +136,11 @@ Classes
       Returns a copy of the field's dictionary's list of keys (fieldnames).
 
 
+
    .. py:method:: get_writable_fieldnames()
 
       Return a copied list containing all writable fieldnames
+
 
 
    .. py:method:: get_reset_values()
@@ -110,9 +148,11 @@ Classes
       Get iterator object of the tuple (fieldname, resetvalue) for writable fields only.
 
 
+
    .. py:method:: field(name)
 
       Get the field by name and add callback for UVM-like set() method of fields
+
 
 
    .. py:method:: items()
@@ -120,9 +160,11 @@ Classes
       Providing all (fieldname, field) tuples for for self-inspection.
 
 
+
    .. py:method:: __iter__()
 
       Iterator over the (name, int) mainly for dict() conversion.
+
 
 
    .. py:method:: __setattr__(name, value)
@@ -130,9 +172,11 @@ Classes
       Enforce that no new attributes are set when the instance is frozen.
 
 
+
    .. py:method:: __str__()
 
       Read the register and format it decomposed as fields as well as integer value.
+
 
 
    .. py:method:: get_value(field_dict = None)
@@ -140,6 +184,7 @@ Classes
       Return the integer view of the register.
       If field_dict is not specified a read will be executed,
       otherwise the dict is composed to get the integer value
+
 
 
    .. py:method:: set_value(value, mask = None)
@@ -151,6 +196,7 @@ Classes
       :param mask: write mask for the register
 
 
+
    .. py:method:: __enter__()
 
       The with statement allows to add fields to the register -
@@ -159,10 +205,12 @@ Classes
           add_fields_register.represent(name="FIELDNAME", bits=(msb,lsb), reset=0x0, ...)
 
 
+
    .. py:method:: __exit__(exception_type, exception_value, exception_traceback)
 
       Lock the register fields - sort-out the writable_fieldnames
       with the help of the write_mask
+
 
 
    .. py:method:: __getattr__(name)
@@ -170,9 +218,11 @@ Classes
       Allow member access of fields - must have '_f' as suffix (<FIELDNAME>_f).
 
 
+
    .. py:method:: read()
 
       UVM-like - Read the current value from this register.
+
 
 
    .. py:method:: get()
@@ -180,9 +230,11 @@ Classes
       UVM-like - Return the desired value of the fields in the register.
 
 
+
    .. py:method:: get_mirrored_value()
 
       UVM-like - Return the mirrored value of the fields in the register.
+
 
 
    .. py:method:: get_mirrored_dict()
@@ -190,9 +242,11 @@ Classes
       UVM-like - Variation of get_mirrored_value() return a dict instead of an int
 
 
+
    .. py:method:: get_mirrored_reg()
 
       UVM-like - Variation of get_mirrored_value() return a reg instead of an int
+
 
 
    .. py:method:: set(value)
@@ -200,9 +254,11 @@ Classes
       UVM-like - Set the desired value for this register.
 
 
+
    .. py:method:: needs_update()
 
       UVM-like - Returns True if any of the fields need updating
+
 
 
    .. py:method:: update()
@@ -211,9 +267,11 @@ Classes
       to match the desired value.
 
 
+
    .. py:method:: write(*args, **kwargs)
 
       UVM-like - Write the specified value in this register.
+
 
 
    .. py:method:: reset()
@@ -221,9 +279,11 @@ Classes
       UVM-like - Reset the desired/mirrored value for this register.
 
 
+
    .. py:method:: get_reset()
 
       UVM-like - Get the specified reset value for this register.
+
 
 
    .. py:method:: get_field_by_name(name)
@@ -231,9 +291,11 @@ Classes
       UVM-like - Return the fields in this register.
 
 
+
    .. py:method:: get_offset()
 
       UVM-like - Returns the offset of this register.
+
 
 
    .. py:method:: get_address()
@@ -241,9 +303,11 @@ Classes
       UVM-like - Returns the base external physical address of this register
 
 
+
    .. py:method:: __int__()
 
       Integer conversion of register value
+
 
 
    .. py:method:: __bool__()
@@ -251,9 +315,11 @@ Classes
       Boolean conversion of register value
 
 
+
    .. py:method:: __eq__(other)
 
       Equal comparison with integer
+
 
 
    .. py:method:: __ne__(other)
@@ -261,9 +327,11 @@ Classes
       Not equal comparison with integer
 
 
+
    .. py:method:: __lt__(other)
 
       Less-than comparison with integer
+
 
 
    .. py:method:: __le__(other)
@@ -271,14 +339,17 @@ Classes
       Less-than/equal comparison with integer
 
 
+
    .. py:method:: __gt__(other)
 
       Greater-than comparison with integer
 
 
+
    .. py:method:: __ge__(other)
 
       Greater-than/equal comparison with integer
+
 
 
    .. py:method:: get_register_entry(value)
@@ -293,14 +364,13 @@ Classes
 
 .. py:class:: RegfileEntry(**kwargs)
 
-
    Bases: :py:obj:`RegisterEntry`
+
 
    RegfileEntry belonging to a :class:`.Regfile` which is callback on access
 
 
 .. py:class:: Regfile(rfdev, base_addr = 0, name = None)
-
 
    A Regfile handles multiple :class:`.RegfileEntry` items.
 
@@ -320,15 +390,19 @@ Classes
                      reg["cfg"].represent(bits="4:0", access="RW", reset="0x0", desc="Configure component")
                      reg["status"].represent(bits="31:16", access="regfile", desc="Component status")
 
-   .. py:property:: name
-      :type: str
-
-      "Return the name of the registerfile
-
 
    .. py:method:: get_base_addr()
 
       Return the base address of the register file (provided upon instantiation).
+
+
+
+   .. py:property:: name
+      :type: str
+
+
+      "Return the name of the registerfile
+
 
 
    .. py:method:: __setitem__(key, value)
@@ -345,6 +419,7 @@ Classes
         submodregfile['reg0'] = {'cfg': 0b1_1011}
 
 
+
    .. py:method:: __getitem__(key)
 
       Access a register entry of register.
@@ -352,9 +427,11 @@ Classes
       :param key: name of the register
 
 
+
    .. py:method:: keys()
 
       Get all register names of the Regfile.
+
 
 
    .. py:method:: values()
@@ -362,9 +439,11 @@ Classes
       Get all registers of the Regfile.
 
 
+
    .. py:method:: items()
 
       Get all names plus the corresponding registers of the Regfile.
+
 
 
    .. py:method:: __iter__()
@@ -375,9 +454,11 @@ Classes
       Apply initial reset value to mirrored value of all registers.
 
 
+
    .. py:method:: get_rfdev()
 
       Get the regfile device with is used upon access.
+
 
 
    .. py:method:: set_rfdev(dev)
@@ -387,9 +468,11 @@ Classes
       :param dev: regfile device
 
 
+
    .. py:method:: __setattr__(name, value)
 
       Enforce that no new attributes are set when the instance is frozen.
+
 
 
    .. py:method:: __getattr__(name)
@@ -404,9 +487,11 @@ Classes
           assert submodregfile["config"] == submodregfile.config_r
 
 
+
    .. py:method:: __enter__()
 
       Context manager of with statement - After __enter__ adding of new entries is allowed.
+
 
 
    .. py:method:: __exit__(exception_type, exception_value, exception_traceback)
@@ -416,7 +501,6 @@ Classes
 
 
 .. py:class:: RegfileMemAccess(rfdev, base_addr, **kwargs)
-
 
    Handling Memory through a regfile device.
 
@@ -428,11 +512,13 @@ Classes
    Optional kwargs:
    :key size: the size of the memory to check of index errors
 
+
    .. py:method:: __getitem__(index)
 
       Read a memory element via index (word addressing)
 
       :param index: word address to be read
+
 
 
    .. py:method:: __setitem__(index, value)
@@ -443,9 +529,11 @@ Classes
       :value value: value to be written to the memory
 
 
+
    .. py:method:: get_rfdev()
 
       Get the regfile device with is used upon access.
+
 
 
    .. py:method:: set_rfdev(dev)
@@ -455,9 +543,11 @@ Classes
       :param dev: regfile device
 
 
+
    .. py:method:: get_base_addr()
 
       Return the base address of the register file (provided upon instantiation).
+
 
 
    .. py:method:: read_image(addr, size)
@@ -468,6 +558,7 @@ Classes
       :param size: size of image to be read from the memory
 
       :return: memory image as list
+
 
 
    .. py:method:: write_image(addr, image)
@@ -481,7 +572,6 @@ Classes
 
 .. py:class:: RegisterField(**kwargs)
 
-
    Register Field data container
 
    This class justs holds name, msb, lsb and user defined informations as reset value or type.
@@ -493,6 +583,16 @@ Classes
 
    Any information that should be store with the field such as the reset value, type, etc. is optional kwarg.
 
+
+   .. py:attribute:: name
+
+
+   .. py:attribute:: msb
+
+
+   .. py:attribute:: lsb
+
+
    .. py:method:: get_field(value)
 
       Get the value of the field from the register value
@@ -500,14 +600,17 @@ Classes
       :param value: Value of the register to extract the field value
 
 
+
    .. py:method:: get_mask()
 
       Get the mask of the field
 
 
+
    .. py:method:: __str__()
 
       Return the name of the field
+
 
 
    .. py:method:: set(value)

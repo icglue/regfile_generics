@@ -1,23 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>regfile_generics &mdash; regfile_generics  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f4da6456" />
+
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -47,14 +47,24 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">regfile_generics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="regfile/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="regfile_device/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile_device</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="regfile/index.html">regfile_generics.regfile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="regfile_device/index.html">regfile_generics.regfile_device</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.Regfile"><code class="docutils literal notranslate"><span class="pre">Regfile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegfileMemAccess"><code class="docutils literal notranslate"><span class="pre">RegfileMemAccess</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegisterEntry"><code class="docutils literal notranslate"><span class="pre">RegisterEntry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegfileDev"><code class="docutils literal notranslate"><span class="pre">RegfileDev</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegfileDevSimple"><code class="docutils literal notranslate"><span class="pre">RegfileDevSimple</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegfileDevSimpleDebug"><code class="docutils literal notranslate"><span class="pre">RegfileDevSimpleDebug</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegfileDevSubword"><code class="docutils literal notranslate"><span class="pre">RegfileDevSubword</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.RegfileDevSubwordDebug"><code class="docutils literal notranslate"><span class="pre">RegfileDevSubwordDebug</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.StringCmdRegfileDevSimple"><code class="docutils literal notranslate"><span class="pre">StringCmdRegfileDevSimple</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regfile_generics.StringCmdRegfileDevSubword"><code class="docutils literal notranslate"><span class="pre">StringCmdRegfileDevSubword</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -78,7 +88,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
-      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics</span></code></li>
+      <li class="breadcrumb-item active">regfile_generics</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -88,21 +98,19 @@
            <div itemprop="articleBody">
              
   <section id="module-regfile_generics">
-<span id="regfile-generics"></span><h1><a class="reference internal" href="#module-regfile_generics" title="regfile_generics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics</span></code></a><a class="headerlink" href="#module-regfile_generics" title="Link to this heading"></a></h1>
+<span id="regfile-generics"></span><h1>regfile_generics<a class="headerlink" href="#module-regfile_generics" title="Link to this heading"></a></h1>
 <p>Regfile generics</p>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="regfile/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="regfile_device/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">regfile_generics.regfile_device</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="regfile/index.html">regfile_generics.regfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regfile_device/index.html">regfile_generics.regfile_device</a></li>
 </ul>
 </div>
 </section>
-<section id="package-contents">
-<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#regfile_generics.Regfile" title="regfile_generics.Regfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Regfile</span></code></a></p></td>
@@ -137,15 +145,18 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.Regfile">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">Regfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rfdev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.Regfile" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">Regfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rfdev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.Regfile" title="Link to this definition"></a></dt>
 <dd><p>A Regfile handles multiple <a class="reference internal" href="regfile/index.html#regfile_generics.regfile.RegfileEntry" title="regfile_generics.regfile.RegfileEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileEntry</span></code></a> items.</p>
 <p>It can be only be initialized by using context managers (with-statement).
 if name is not given the default name will be the <code class="docutils literal notranslate"><span class="pre">&lt;CLASSNAME&gt;&#64;&lt;BASEADDR&gt;</span></code>.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SubmodRegfile</span><span class="p">(</span><span class="n">Regfile</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rfdev</span><span class="p">,</span> <span class="n">base_addr</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SubmodRegfile</span><span class="p">(</span><span class="n">Regfile</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rfdev</span><span class="p">,</span> <span class="n">base_addr</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">rfdev</span><span class="p">,</span> <span class="n">base_addr</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="bp">self</span> <span class="k">as</span> <span class="n">regfile</span><span class="p">:</span>
@@ -157,22 +168,11 @@ if name is not given the default name will be the <code class="docutils literal 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>base_addr</strong> (<em>int</em>) – </p></li>
-<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>base_addr</strong> (<em>int</em>)</p></li>
+<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py property">
-<dt class="sig sig-object py" id="regfile_generics.Regfile.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#regfile_generics.Regfile.name" title="Link to this definition"></a></dt>
-<dd><p>“Return the name of the registerfile</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.Regfile.get_base_addr">
 <span class="sig-name descname"><span class="pre">get_base_addr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.Regfile.get_base_addr" title="Link to this definition"></a></dt>
@@ -180,6 +180,17 @@ if name is not given the default name will be the <code class="docutils literal 
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="regfile_generics.Regfile.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#regfile_generics.Regfile.name" title="Link to this definition"></a></dt>
+<dd><p>“Return the name of the registerfile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -331,7 +342,7 @@ To avoid collisions the name has a <code class="docutils literal notranslate"><s
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegfileMemAccess">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileMemAccess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rfdev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_addr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileMemAccess" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileMemAccess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rfdev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_addr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileMemAccess" title="Link to this definition"></a></dt>
 <dd><p>Handling Memory through a regfile device.</p>
 <p>Note that indexing is word wise, depending on <a class="reference internal" href="regfile_device/index.html#regfile_generics.regfile_device.RegfileDev.n_word_bytes" title="regfile_generics.regfile_device.RegfileDev.n_word_bytes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">regfile_device.RegfileDev.n_word_bytes</span></code></a>.</p>
 <dl class="field-list simple">
@@ -366,7 +377,7 @@ To avoid collisions the name has a <code class="docutils literal notranslate"><s
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index</strong> (<em>int</em>) – word address to be read</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – </p></li>
+<li><p><strong>value</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Value value<span class="colon">:</span></dt>
@@ -452,9 +463,39 @@ To avoid collisions the name has a <code class="docutils literal notranslate"><s
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegisterEntry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegisterEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegisterEntry" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegisterEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegisterEntry" title="Link to this definition"></a></dt>
 <dd><p>Decompose access of a register into fields.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> are specified, they are passed to the <a class="reference internal" href="#regfile_generics.RegisterEntry.represent" title="regfile_generics.RegisterEntry.represent"><code class="xref py py-func docutils literal notranslate"><span class="pre">represent()</span></code></a> function.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegisterEntry.addr">
+<span class="sig-name descname"><span class="pre">addr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegisterEntry.addr" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegisterEntry.write_mask">
+<span class="sig-name descname"><span class="pre">write_mask</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#regfile_generics.RegisterEntry.write_mask" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegisterEntry.regfile">
+<span class="sig-name descname"><span class="pre">regfile</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#regfile_generics.RegisterEntry.regfile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegisterEntry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UNNAMED'</span></em><a class="headerlink" href="#regfile_generics.RegisterEntry.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegisterEntry.mirrored_value">
+<span class="sig-name descname"><span class="pre">mirrored_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegisterEntry.mirrored_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegisterEntry.desired_value">
+<span class="sig-name descname"><span class="pre">desired_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegisterEntry.desired_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.RegisterEntry.represent">
 <span class="sig-name descname"><span class="pre">represent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mirrored_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegisterEntry.represent" title="Link to this definition"></a></dt>
@@ -462,13 +503,13 @@ To avoid collisions the name has a <code class="docutils literal notranslate"><s
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>addr</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
-<li><p><strong>write_mask</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
-<li><p><strong>fields</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="regfile/index.html#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField"><em>RegisterField</em></a><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>regfile</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#regfile_generics.Regfile" title="regfile_generics.Regfile"><em>Regfile</em></a><em>]</em>) – </p></li>
-<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
-<li><p><strong>reset</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
-<li><p><strong>mirrored_value</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>addr</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>write_mask</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>fields</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="regfile/index.html#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField"><em>RegisterField</em></a><em>]</em><em>]</em>)</p></li>
+<li><p><strong>regfile</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#regfile_generics.Regfile" title="regfile_generics.Regfile"><em>Regfile</em></a><em>]</em>)</p></li>
+<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>reset</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+<li><p><strong>mirrored_value</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -612,7 +653,7 @@ otherwise the value is decomposed to the fields</p>
 <dd><p>Get the field by name and add callback for UVM-like set() method of fields</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="regfile/index.html#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField">RegisterField</a></p>
@@ -667,7 +708,7 @@ If field_dict is not specified a read will be executed,
 otherwise the dict is composed to get the integer value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>field_dict</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>field_dict</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
@@ -721,7 +762,7 @@ with the help of the write_mask</p>
 <dd><p>Allow member access of fields - must have ‘_f’ as suffix (&lt;FIELDNAME&gt;_f).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -787,7 +828,7 @@ with the help of the write_mask</p>
 <dd><p>UVM-like - Set the desired value for this register.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – </p>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -857,7 +898,7 @@ to match the desired value.</p>
 <dd><p>UVM-like - Return the fields in this register.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="regfile/index.html#regfile_generics.regfile.RegisterField" title="regfile_generics.regfile.RegisterField">RegisterField</a></p>
@@ -956,7 +997,7 @@ to match the desired value.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDev">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes_per_word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDev" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes_per_word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDev" title="Link to this definition"></a></dt>
 <dd><p>Regfile Device class that handels the access of a Regfile</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -980,9 +1021,19 @@ pointing to a register read/write function</p></li>
 </dd>
 </dl>
 </div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDev.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#regfile_generics.RegfileDev.logger" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDev.callback">
+<span class="sig-name descname"><span class="pre">callback</span></span><a class="headerlink" href="#regfile_generics.RegfileDev.callback" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDev.n_word_bytes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_word_bytes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#regfile_generics.RegfileDev.n_word_bytes" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_word_bytes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#regfile_generics.RegfileDev.n_word_bytes" title="Link to this definition"></a></dt>
 <dd><p>Returs the number of bytes per word the device handles on one operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1017,8 +1068,8 @@ pointing to a register read/write function</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>start_addr</strong> (<em>int</em>) – </p></li>
-<li><p><strong>values</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>Ellipsis</em><em>]</em>) – </p></li>
+<li><p><strong>start_addr</strong> (<em>int</em>)</p></li>
+<li><p><strong>values</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>Ellipsis</em><em>]</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1034,7 +1085,7 @@ pointing to a register read/write function</p></li>
 - could be overridden, when deriving a new RegfileDev</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>addr</strong> (<em>int</em>) – </p>
+<dd class="field-odd"><p><strong>addr</strong> (<em>int</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
@@ -1113,7 +1164,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDevSimple">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSimple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes_per_word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSimple" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSimple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes_per_word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSimple" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#regfile_generics.RegfileDev" title="regfile_generics.RegfileDev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileDev</span></code></a></p>
 <p>RegfileDev that operates on words only (implements read-modify-write if necessary)</p>
 <p>Derived from <a class="reference internal" href="#regfile_generics.RegfileDev" title="regfile_generics.RegfileDev"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileDev</span></code></a></p>
@@ -1131,10 +1182,10 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>callback</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Callable</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>bytes_per_word</strong> (<em>int</em>) – </p></li>
-<li><p><strong>logger</strong> (<em>Optional</em><em>[</em><em>logging.Logger</em><em>]</em>) – </p></li>
-<li><p><strong>prefix</strong> (<em>str</em>) – </p></li>
+<li><p><strong>callback</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Callable</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>bytes_per_word</strong> (<em>int</em>)</p></li>
+<li><p><strong>logger</strong> (<em>Optional</em><em>[</em><em>logging.Logger</em><em>]</em>)</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1179,7 +1230,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDevSimpleDebug">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSimpleDebug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSimpleDebug" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSimpleDebug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSimpleDebug" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#regfile_generics.RegfileDevSimple" title="regfile_generics.RegfileDevSimple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileDevSimple</span></code></a></p>
 <p>Debug implementation of <a class="reference internal" href="#regfile_generics.RegfileDevSimple" title="regfile_generics.RegfileDevSimple"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileDevSimple</span></code></a></p>
 <dl class="field-list simple">
@@ -1187,6 +1238,21 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 <dd class="field-odd"><p><strong>interactive</strong> (<em>bool</em>) – if set to <code class="docutils literal notranslate"><span class="pre">True</span></code> the regfile device will request a user input upon read.</p>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDevSimpleDebug.mem">
+<span class="sig-name descname"><span class="pre">mem</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#regfile_generics.RegfileDevSimpleDebug.mem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDevSimpleDebug.write_count">
+<span class="sig-name descname"><span class="pre">write_count</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegfileDevSimpleDebug.write_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDevSimpleDebug.read_count">
+<span class="sig-name descname"><span class="pre">read_count</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegfileDevSimpleDebug.read_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDevSimpleDebug.rfdev_read">
 <span class="sig-name descname"><span class="pre">rfdev_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSimpleDebug.rfdev_read" title="Link to this definition"></a></dt>
@@ -1196,7 +1262,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 <dd class="field-odd"><p>addr address</p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>addr</strong> (<em>int</em>) – </p>
+<dd class="field-even"><p><strong>addr</strong> (<em>int</em>)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
@@ -1239,7 +1305,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDevSubword">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSubword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes_per_word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSubword" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSubword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes_per_word</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSubword" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#regfile_generics.RegfileDev" title="regfile_generics.RegfileDev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileDev</span></code></a></p>
 <p>RegfileDev that operates on word sizes (implements read-modify-write if this)</p>
 <p>Derived from <a class="reference internal" href="#regfile_generics.RegfileDev" title="regfile_generics.RegfileDev"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileDev</span></code></a></p>
@@ -1257,10 +1323,10 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>callback</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Callable</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>bytes_per_word</strong> (<em>int</em>) – </p></li>
-<li><p><strong>logger</strong> (<em>Optional</em><em>[</em><em>logging.Logger</em><em>]</em>) – </p></li>
-<li><p><strong>prefix</strong> (<em>str</em>) – </p></li>
+<li><p><strong>callback</strong> (<em>Optional</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Callable</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>bytes_per_word</strong> (<em>int</em>)</p></li>
+<li><p><strong>logger</strong> (<em>Optional</em><em>[</em><em>logging.Logger</em><em>]</em>)</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1308,7 +1374,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDevSubwordDebug">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSubwordDebug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSubwordDebug" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">RegfileDevSubwordDebug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSubwordDebug" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#regfile_generics.RegfileDevSubword" title="regfile_generics.RegfileDevSubword"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileDevSubword</span></code></a></p>
 <p>Debug implementation of <a class="reference internal" href="#regfile_generics.RegfileDevSimple" title="regfile_generics.RegfileDevSimple"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegfileDevSimple</span></code></a></p>
 <dl class="field-list simple">
@@ -1316,6 +1382,21 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 <dd class="field-odd"><p><strong>interactive</strong> (<em>bool</em>) – if set to <code class="docutils literal notranslate"><span class="pre">True</span></code> the regfile device will request a user input upon read.</p>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDevSubwordDebug.mem">
+<span class="sig-name descname"><span class="pre">mem</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#regfile_generics.RegfileDevSubwordDebug.mem" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDevSubwordDebug.write_count">
+<span class="sig-name descname"><span class="pre">write_count</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegfileDevSubwordDebug.write_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.RegfileDevSubwordDebug.read_count">
+<span class="sig-name descname"><span class="pre">read_count</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#regfile_generics.RegfileDevSubwordDebug.read_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.RegfileDevSubwordDebug.getvalue">
 <span class="sig-name descname"><span class="pre">getvalue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.RegfileDevSubwordDebug.getvalue" title="Link to this definition"></a></dt>
@@ -1339,7 +1420,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 <dd class="field-odd"><p>addr address</p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>addr</strong> (<em>int</em>) – </p>
+<dd class="field-even"><p><strong>addr</strong> (<em>int</em>)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
@@ -1369,7 +1450,7 @@ through the value of the “rfdev_write”-key of the callback dictionary.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSimple">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">StringCmdRegfileDevSimple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">execute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSimple" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">StringCmdRegfileDevSimple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">execute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSimple" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#regfile_generics.RegfileDevSimple" title="regfile_generics.RegfileDevSimple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileDevSimple</span></code></a></p>
 <p>Forwards regfile operations to a function call with string command,
 to do the regfile operations.</p>
@@ -1389,13 +1470,18 @@ to do the regfile operations.</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>execute</strong> (<em>Optional</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>str</em><em>]</em><em>, </em><em>Optional</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>execute</strong> (<em>Optional</em><em>[</em><em>Callable</em><em>[</em><em>[</em><em>str</em><em>]</em><em>, </em><em>Optional</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>)</p>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSimple.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSimple.execute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSimple.rfdev_read">
 <span class="sig-name descname"><span class="pre">rfdev_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSimple.rfdev_read" title="Link to this definition"></a></dt>
-<dd><p>Debug read function implementation translates to <code class="xref py py-func docutils literal notranslate"><span class="pre">execute()</span></code></p>
+<dd><p>Debug read function implementation translates to <a class="reference internal" href="#regfile_generics.StringCmdRegfileDevSimple.execute" title="regfile_generics.StringCmdRegfileDevSimple.execute"><code class="xref py py-func docutils literal notranslate"><span class="pre">execute()</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>addr</strong> (<em>int</em>) – absolute address for read operation</p>
@@ -1409,7 +1495,7 @@ to do the regfile operations.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSimple.rfdev_write_simple">
 <span class="sig-name descname"><span class="pre">rfdev_write_simple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSimple.rfdev_write_simple" title="Link to this definition"></a></dt>
-<dd><p>Debug write function implementation translates to <code class="xref py py-func docutils literal notranslate"><span class="pre">execute()</span></code></p>
+<dd><p>Debug write function implementation translates to <a class="reference internal" href="#regfile_generics.StringCmdRegfileDevSimple.execute" title="regfile_generics.StringCmdRegfileDevSimple.execute"><code class="xref py py-func docutils literal notranslate"><span class="pre">execute()</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1424,7 +1510,7 @@ to do the regfile operations.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSubword">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">StringCmdRegfileDevSubword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSubword" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">regfile_generics.</span></span><span class="sig-name descname"><span class="pre">StringCmdRegfileDevSubword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSubword" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#regfile_generics.RegfileDevSubword" title="regfile_generics.RegfileDevSubword"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegfileDevSubword</span></code></a></p>
 <p>Forwards regfile operations to a function call with string command,
 to do the regfile operations.</p>
@@ -1445,6 +1531,11 @@ to do the regfile operations.</p>
 </dd>
 </dl>
 </div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSubword.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSubword.execute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="regfile_generics.StringCmdRegfileDevSubword.rfdev_read">
 <span class="sig-name descname"><span class="pre">rfdev_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#regfile_generics.StringCmdRegfileDevSubword.rfdev_read" title="Link to this definition"></a></dt>
@@ -1452,7 +1543,7 @@ to do the regfile operations.</p>
 - could be overridden, when deriving a new RegfileDev</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>addr</strong> (<em>int</em>) – </p>
+<dd class="field-odd"><p><strong>addr</strong> (<em>int</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
@@ -1480,7 +1571,6 @@ to do the regfile operations.</p>
 
 </dd></dl>
 
-</section>
 </section>
 </section>
 
@@ -1519,6 +1609,7 @@ to do the regfile operations.</p>
     <dl>
       <dt>Tags</dt>
       <dd><a href="index.html">0.2.0.dev0</a></dd>
+      <dd><a href="../../../0.2.0rc1/index.html">0.2.0rc1</a></dd>
     </dl>
     <dl>
       <dt>Branches</dt>
