@@ -69,7 +69,7 @@ class RegisterEntry:  # pylint: disable=too-many-instance-attributes,too-many-pu
         if kwargs:
             self.represent(**kwargs)
 
-    def represent(  # pylint: disable=too-many-arguments
+    def represent(  # pylint: disable=too-many-arguments,too-many-positional-arguments
         self,
         addr: Optional[int] = None,
         write_mask: Optional[int] = None,
